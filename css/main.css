@@ -10,6 +10,10 @@ body {
   color: #20364c !important;
 }
 
+.dark-green {
+  color: #26c033 !important;
+}
+
 #badge-more {
   background-color: #1585cf;
   color: white;
