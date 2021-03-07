@@ -118,7 +118,7 @@ blockquote footer {
 
 .publications li {
   margin-left: 2rem;
-  text-indent: -2.5rem;
+  /* text-indent: -2.5rem; */
   ;
 }
 
