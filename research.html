@@ -54,14 +54,14 @@
          <div class="col-sm-12">
             <h1>Research</h1>
             
-            <p>My research bridges academic rigor and industrial scale. At <b>LinkedIn</b>, I work on the machine learning behind job search and job matching &mdash; how a seeker's intent is understood, how relevant jobs are retrieved from hundreds of millions of candidates, and how the signals that drive those decisions are served in production under tight latency and cost budgets.</p>
+            <p>At <b>LinkedIn</b>, I work on the machine learning behind job search and job matching: figuring out what a seeker is actually asking for, finding the jobs worth showing them, and getting the models that make those decisions into production within real latency and cost limits.</p>
 
-            <p>My first-author work traces three threads of that problem:</p>
+            <p>Most of the hard problems there are not modeling problems. They are questions about what a system should optimize for, and whether the thing you measured is the thing you wanted. My work follows three threads:</p>
 
             <ul class="push-down-1">
-               <li><b>Query understanding with LLMs</b> &mdash; replacing cascades of task-specific components with small language models that interpret and rewrite search queries, and designing the reward signals that make training them reliable.</li>
-               <li><b>Graph learning for matching</b> &mdash; using LinkedIn's professional graph to learn representations of members and jobs that downstream retrieval and ranking models can consume.</li>
-               <li><b>Signal and serving infrastructure</b> &mdash; the systems that let hundreds of features and models be integrated, evaluated, and shipped without breaking scale.</li>
+               <li><b>Query understanding with LLMs</b> &mdash; replacing cascades of task-specific components with small language models that interpret and rewrite search queries, and designing reward signals that survive contact with a policy optimizer looking for shortcuts.</li>
+               <li><b>Graph learning for matching</b> &mdash; using LinkedIn's professional graph to learn member and job representations that retrieval and ranking models can reuse without retraining the graph model.</li>
+               <li><b>Signal and serving infrastructure</b> &mdash; the systems that let new features and models be integrated, evaluated, and shipped fast enough that iterating stays cheap.</li>
             </ul>
 
             <p>Before LinkedIn, my Ph.D. research focused on natural language processing in social networks, filter bubbles in news recommender systems, and active learning.</p>
