@@ -54,106 +54,84 @@
          <div class="col-sm-12">
             <h1>Research</h1>
             
-            <p>My research bridges academic rigor and industrial scale. Currently, I focus on applying Large Language Models, Graph Neural Networks and different deep learning techniques to large-scale recommendation and retrieval problems at LinkedIn.</p>
+            <p>My research bridges academic rigor and industrial scale. At <b>LinkedIn</b>, I work on the machine learning behind job search and job matching &mdash; how a seeker's intent is understood, how relevant jobs are retrieved from hundreds of millions of candidates, and how the signals that drive those decisions are served in production under tight latency and cost budgets.</p>
 
-            <p>Previously, my Ph.D. research focused on natural language processing in social networks, filter bubbles in news recommender systems, and active learning.</p>
-
-            <p>I focus specifically in these topics:</p>
+            <p>My first-author work traces three threads of that problem:</p>
 
             <ul class="push-down-1">
-               <li><b>Recommender Systems</b> &mdash; EBR (Embedding-based Retrieval), Ranking models, and Filter Bubbles</li>
-               <li><b>Graph Neural Networks (GNN)</b> &mdash; Large-scale graph learning for industrial applications</li>
-               <li><b>Natural Language Processing</b> &mdash; Hate speech detection and offensive language detection</li>
-               <li><b>Computer Vision</b> &mdash; Microscopy image analysis and cell activity classification</li>
+               <li><b>Query understanding with LLMs</b> &mdash; replacing cascades of task-specific components with small language models that interpret and rewrite search queries, and designing the reward signals that make training them reliable.</li>
+               <li><b>Graph learning for matching</b> &mdash; using LinkedIn's professional graph to learn representations of members and jobs that downstream retrieval and ranking models can consume.</li>
+               <li><b>Signal and serving infrastructure</b> &mdash; the systems that let hundreds of features and models be integrated, evaluated, and shipped without breaking scale.</li>
             </ul>
 
-            <!-- <div class="row push-down-4" style="display: flex; align-items: center; flex-wrap: wrap;">
+            <p>Before LinkedIn, my Ph.D. research focused on natural language processing in social networks, filter bubbles in news recommender systems, and active learning.</p>
+
+            <div class="row push-down-4" style="display: flex; align-items: center; flex-wrap: wrap;">
                 <div class="col-md-8 col-xs-12">
-                    <h3 style="margin-top: 0;"><span>Publications and Preprints</span></h3>
+                    <h3 style="margin-top: 0;"><span>Publications</span></h3>
                 </div>
                 <div class="col-md-4 col-xs-12 text-right">
                     <a href="https://scholar.google.com/citations?user=2ESlO3UAAAAJ&hl=en" target="_blank" class="btn btn-primary btn-sm">
                         <i class="ai ai-google-scholar"></i> View on Google Scholar
                     </a>
                 </div>
-            </div> -->
+            </div>
 
-            <h4>Published Papers</h4>
+            <h3 class="push-down-3"><span>Selected Work at LinkedIn</span></h3>
+
+            <p class="text-muted">First-author papers. Each one corresponds to a system that shipped to production in LinkedIn Job Search or Job Matching.</p>
 
             <ul class="publications">
+
+               <li>
+                  Designing Reward Signals for Portable Query Generation: A Case Study in Industrial Semantic Job Search <br>
+                  <b>Ping Liu</b>, Qianqi Shen, Jianqiang Shen, Wenqiong Liu, Rajat Arora, Yunxiang Ren, Chunnan Yao, Dan Xu, Baofen Zheng, Wanjun Jiang, Andrii Soviak, Kevin Kao, Jingwei Wu, Wenjing Zhang <br>
+                  <i>arXiv preprint (2026)</i> &nbsp;&middot;&nbsp; <a href="https://arxiv.org/abs/2606.27291" target="_blank">arXiv</a> <br>
+                  <span class="text-muted">An end-to-end RLAIF framework that generates <em>portable</em> job-search queries &mdash; abstracting away seeker-specific identifiers while preserving generalizable qualifications. We show that policy optimization readily exploits flaws in LLM-as-judge rubrics, collapsing into degenerate verbatim-copying, and that a deterministic rule-based reward floor fixes it. For critic-free optimizers, reward design matters more than the choice of algorithm.</span>
+               </li><br>
+
+               <li>
+                  A Unified Structured Query Understanding Framework for Industrial Semantic Search <br>
+                  <b>Ping Liu</b>, Qianqi Shen, Jianqiang Shen, Chunnan Yao, Kevin Kao, Rajat Arora, Dan Xu, Baofen Zheng, Yunxiang Ren, Benjamin Le, Ali Hooshmand, Igor Lapchuk, Juan Bottaro, Raghavan Muthuregunathan, Caleb Johnson, Liangjie Hong, Jingwei Wu, Wenjing Zhang <br>
+                  <i>arXiv preprint (2026)</i> &nbsp;&middot;&nbsp; <a href="https://arxiv.org/abs/2605.27441" target="_blank">arXiv</a> <br>
+                  <span class="text-muted">Replaces the usual cascade of disparate, task-specific query-understanding components with a single Small Language Model doing constrained generation. Introduces <em>Query Illuminator</em>, which serves double duty as a teacher for auto-annotation and distillation and as a surrogate judge for scalable evaluation. Deployed in LinkedIn Job Search and People Search under strict latency limits on constrained GPU capacity.</span>
+               </li><br>
 
                <li>
                   Powering Job Search at Scale: LLM-Enhanced Query Understanding in Job Matching Systems <br>
                   <b>Ping Liu</b>, Jianqiang Shen, Qianqi Shen, Chunnan Yao, Kevin Kao, Dan Xu, Rajat Arora, Baofen Zheng, Caleb Johnson, Liangjie Hong, Jingwei Wu, Wenjing Zhang <br>
                   <i>CIKM (2025)</i> <br>
+                  <span class="text-muted">Brings LLM-based query understanding into the production job search stack, interpreting seeker intent from short, ambiguous queries at LinkedIn's request volume.</span>
                </li><br>
 
                <li>
                   LinkSAGE: Optimizing Job Matching Using Graph Neural Networks <br>
                   <b>Ping Liu</b>, Haichao Wei, Xiaochen Hou, Jianqiang Shen, Shihai He, Kay Qianqi Shen, Zhujun Chen, Fedor Borisyuk, Daniel Hewlett, Liang Wu, Srikant Veeraraghavan, Alex Tsun, Chengming Jiang, Wenjing Zhang <br>
                   <i>KDD (2025)</i> <br>
+                  <span class="text-muted">A graph neural network framework over LinkedIn's professional graph for job matching. GNN training is decoupled from the downstream ranking models, so learned member and job representations can be consumed by many models without retraining the graph model itself.</span>
                </li><br>
 
                <li>
                   A Scalable and Efficient Signal Integration System for Job Matching <br>
                   <b>Ping Liu</b>, Rajat Arora, Xiao Shi, Benjamin Le, Qianqi Shen, Jianqiang Shen, Chengming Jiang, Nikita Zhiltsov, Priya Bannur, Yidan Zhu, Liming Dong, Haichao Wei, Qi Guo, Luke Simon, Liangjie Hong, Wenjing Zhang <br>
                   <i>KDD (2025)</i> <br>
+                  <span class="text-muted">The infrastructure side of the problem: how heterogeneous signals get integrated into job matching models efficiently enough to keep iterating on them at scale.</span>
                </li><br>
 
-               <li>
-                  Assessing multi-hazards related to tropical cyclones through large language models and geospatial approaches <br>
-                  Yao Zhou, <b>Ping Liu</b> <br>
-                  <i>Environmental Research Letters (2024)</i> <br>
-               </li><br>
+            </ul>
 
-               <li>
-                  LiGNN: Graph Neural Networks at LinkedIn <br>
-                  Fedor Borisyuk, Shihai He, Yunbo Ouyang, Morteza Ramezani, Peng Du, Xiaochen Hou, Chengming Jiang, Nitin Pasumarthy, Priya Bannur, Birjodh Tiwana, <b>Ping Liu</b>, Siddharth Dangi, Daqi Sun, Zhoutao Pei, Xiao Shi, Sirou Zhu, Qianqi Shen, Kuang-Hsuan Lee, David Stein, Baolei Li, Haichao Wei, Amol Ghoting, Souvik Ghosh <br>
-                  <i>KDD (2024 <b>Best Paper Award</b>) </i> <br>
-               </li><br>
+            <h3 class="push-down-3"><span>Ph.D. Research</span></h3>
 
-               <li>
-                  Learning Links for Adaptable and Explainable Retrieval<br>
-                  Jianqiang Shen, Yuchin Juan, <b>Ping Liu</b>, Wen Pu, Shaobo Zhang, Qianqi Shen, Liangjie Hong, Wenjing Zhang <br>
-                  <i>CIKM (2024)</i> <br>
-               </li><br>
-               
+            <p class="text-muted">First-author papers on filter bubbles in news recommendation, NLP in social networks, and vision for microscopy.</p>
+
+            <ul class="publications">
+
                <li>
                   How Does Empowering Users with Greater System Control Affect News Filter Bubbles?<br>
                   <b>Ping Liu</b>, Karthik Shivaram, Aron Culotta, Matthew Shapiro, Mustafa Bilgic <br>
                   <i>ICWSM (2024)</i> <br>
                </li><br>
-               
-               <li>
-                  An agent-based model on antimicrobial de-escalation in intensive care units: Implications on clinical trial design <br>
-                  Xi Huo, <b>Ping Liu</b> <br>
-                  <i>PLOS ONE (2024)</i><br>
-               </li><br>
 
-               <li>
-                  The Analysis of the Expected Change in the Classification Probability of the Predicted Label<br>
-                  Ruo Yang, <b>Ping Liu</b>, Mustafa Bilgic <br>
-                  <i>Transactions on Machine Learning Research (2023)</i> <br>
-               </li><br>
-               
-               <li>
-                  Reducing Cross-Topic Political Homogenization in Content-Based News Recommendation <br>
-                  Karthik Shivaram, <b>Ping Liu</b>, Matthew A. Shapiro, Mustafa Bilgic, and Aron Culotta <br>
-                  <i>RecSys (2022)</i> <br>
-               </li><br>
-
-               <li>
-                  OrganoID: a versatile deep learning platform for organoid image analysis approach <br>
-                  Jonathan Matthews, Brooke Schuster, Sara Saheb Kashaf, <b>Ping Liu</b>, Mustafa Bilgic, Andrey Rzhetsky, Savaş Tay <br>
-                  <i>PLOS Computational Biology (2022)</i> <br>
-               </li><br>
-
-               <li>
-                  Computer-vision reveals hidden variables underlying NF-κB activation in single cells <br>
-                  Parthiv Patel, Nir Drayman, <b> Ping Liu </b>, Mustafa Bilgic, and Savaş Tay <br>
-                  <i>Science Advances (2021)</i> <br>
-               </li><br>
-               
                <li>
                   The interaction between political typology and filter bubbles in news recommendation algorithms <br>
                   <b>Ping Liu</b>, Karthik Shivaram, Aron Culotta, Matthew A. Shapiro, and Mustafa Bilgic <br>
@@ -173,15 +151,119 @@
                </li><br>
 
                <li>
+                  Forecasting the presence and intensity of hostility on Instagram using linguistic and social features <br>
+                  <b> Ping Liu </b>, Joshua Guberman, Libby Hemphill, and Aron Culotta <br>
+                  <i>ICWSM (2018)</i> <br>
+               </li><br>
+
+            </ul>
+
+            <h3 class="push-down-3"><span>Collaborations</span></h3>
+
+            <p class="text-muted">Co-authored work, most of it on LinkedIn's search and recommendation stack, plus ongoing collaborations in geoscience and computational biology.</p>
+
+            <ul class="publications">
+
+               <li>
+                  Policy-Grounded Dynamic Facet Suggestions for Job Search <br>
+                  Dan Xu, Baofen Zheng, Qianqi Shen, Jianqiang Shen, Wenqiong Liu, Chunnan Yao, <b>Ping Liu</b>, Rajat Arora, Kevin Kao, Hsiang Lin, Wanjun Jiang, Yusuke Takebuchi, Jingwei Wu, Wenjing Zhang <br>
+                  <i>SIGIR (2026)</i> &nbsp;&middot;&nbsp; <a href="https://arxiv.org/abs/2605.16479" target="_blank">arXiv</a> <br>
+               </li><br>
+
+               <li>
+                  Semantic Search at LinkedIn <br>
+                  Fedor Borisyuk, Sriram Vasudevan, Muchen Wu, Guoyao Li, Benjamin Le, Shaobo Zhang, Qianqi Kay Shen, Yuchin Juan, <b>Ping Liu</b>, et al. <br>
+                  <i>arXiv preprint (2026)</i> &nbsp;&middot;&nbsp; <a href="https://arxiv.org/abs/2602.07309" target="_blank">arXiv</a> <br>
+               </li><br>
+
+               <li>
+                  High Fidelity Textual User Representation over Heterogeneous Sources via Reinforcement Learning <br>
+                  Rajat Arora, Ye Tao, Jianqiang Shen, <b>Ping Liu</b>, Muchen Wu, Qianqi Shen, Benjamin Le, Fedor Borisyuk, Jingwei Wu, Wenjing Zhang <br>
+                  <i>arXiv preprint (2026)</i> &nbsp;&middot;&nbsp; <a href="https://arxiv.org/abs/2602.07333" target="_blank">arXiv</a> <br>
+               </li><br>
+
+               <li>
+                  Identification of tropical cyclone&ndash;related flash floods from hazard narratives using a large language model&ndash;based approach <br>
+                  Yao Zhou, Corene Matyas, <b>Ping Liu</b>, Han Li <br>
+                  <i>npj Natural Hazards (2025)</i> &nbsp;&middot;&nbsp; <a href="https://www.nature.com/articles/s44304-025-00156-6" target="_blank">paper</a> <br>
+               </li><br>
+
+               <li>
+                  Assessing multi-hazards related to tropical cyclones through large language models and geospatial approaches <br>
+                  Yao Zhou, <b>Ping Liu</b> <br>
+                  <i>Environmental Research Letters (2024)</i> <br>
+               </li><br>
+
+               <li>
+                  LiGNN: Graph Neural Networks at LinkedIn <br>
+                  Fedor Borisyuk, Shihai He, Yunbo Ouyang, Morteza Ramezani, Peng Du, Xiaochen Hou, Chengming Jiang, Nitin Pasumarthy, Priya Bannur, Birjodh Tiwana, <b>Ping Liu</b>, Siddharth Dangi, Daqi Sun, Zhoutao Pei, Xiao Shi, Sirou Zhu, Qianqi Shen, Kuang-Hsuan Lee, David Stein, Baolei Li, Haichao Wei, Amol Ghoting, Souvik Ghosh <br>
+                  <i>KDD (2024 <b>Best Paper Award</b>) </i> <br>
+               </li><br>
+
+               <li>
+                  Learning Links for Adaptable and Explainable Retrieval<br>
+                  Jianqiang Shen, Yuchin Juan, <b>Ping Liu</b>, Wen Pu, Shaobo Zhang, Qianqi Shen, Liangjie Hong, Wenjing Zhang <br>
+                  <i>CIKM (2024)</i> <br>
+               </li><br>
+
+               <li>
+                  Learning to Retrieve for Job Matching <br>
+                  Jianqiang Shen, Yuchin Juan, Shaobo Zhang, <b>Ping Liu</b>, Wen Pu, Sriram Vasudevan, Qingquan Song, Fedor Borisyuk, et al. <br>
+                  <i>arXiv preprint (2024)</i> &nbsp;&middot;&nbsp; <a href="https://arxiv.org/abs/2402.13435" target="_blank">arXiv</a> <br>
+               </li><br>
+
+               <li>
+                  An agent-based model on antimicrobial de-escalation in intensive care units: Implications on clinical trial design <br>
+                  Xi Huo, <b>Ping Liu</b> <br>
+                  <i>PLOS ONE (2024)</i><br>
+               </li><br>
+
+               <li>
+                  The Analysis of the Expected Change in the Classification Probability of the Predicted Label<br>
+                  Ruo Yang, <b>Ping Liu</b>, Mustafa Bilgic <br>
+                  <i>Transactions on Machine Learning Research (2023)</i> <br>
+               </li><br>
+
+               <li>
+                  Reducing Cross-Topic Political Homogenization in Content-Based News Recommendation <br>
+                  Karthik Shivaram, <b>Ping Liu</b>, Matthew A. Shapiro, Mustafa Bilgic, and Aron Culotta <br>
+                  <i>RecSys (2022)</i> <br>
+               </li><br>
+
+               <li>
+                  OrganoID: a versatile deep learning platform for organoid image analysis approach <br>
+                  Jonathan Matthews, Brooke Schuster, Sara Saheb Kashaf, <b>Ping Liu</b>, Mustafa Bilgic, Andrey Rzhetsky, Savaş Tay <br>
+                  <i>PLOS Computational Biology (2022)</i> <br>
+               </li><br>
+
+               <li>
+                  Computer-vision reveals hidden variables underlying NF-κB activation in single cells <br>
+                  Parthiv Patel, Nir Drayman, <b> Ping Liu </b>, Mustafa Bilgic, and Savaş Tay <br>
+                  <i>Science Advances (2021)</i> <br>
+               </li><br>
+
+               <li>
                   A comparative study of off-line deep learning based network intrusion detection <br>
                   Jiaqi Yan, Dong Jin, Cheol Won Lee, and <b> Ping Liu </b> <br>
                   <i>The 10th International Conference on Ubiquitous and Future Networks (2018)</i> <br>
                </li><br>
 
+            </ul>
+
+            <h3 class="push-down-3"><span>Patents</span></h3>
+
+            <ul class="publications">
+
                <li>
-                  Forecasting the presence and intensity of hostility on Instagram using linguistic and social features <br>
-                  <b> Ping Liu </b>, Joshua Guberman, Libby Hemphill, and Aron Culotta <br>
-                  <i>ICWSM (2018)</i> <br>
+                  Deconstructing graphs using a database management approach <br>
+                  <b>Ping Liu</b>, Juan E. C. Espinoza, Priya S. Bannur, Andrii Soviak, Qianqi Shen, Jianqiang Shen <br>
+                  <i>U.S. Patent Application 19/348,320 (2026)</i> <br>
+               </li><br>
+
+               <li>
+                  Targeting techniques for promoted job postings <br>
+                  Wen Pu, Yuchin Juan, <b>Ping Liu</b>, Kevin Tian, Dan Wang <br>
+                  <i>U.S. Patent Application 17/674,695 (2023)</i> <br>
                </li><br>
 
             </ul>

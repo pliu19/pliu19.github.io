@@ -76,6 +76,20 @@
       .read-more-btn {
          margin-top: 10px;
       }
+      .post-body {
+         border-left: 3px solid #eee;
+         padding-left: 18px;
+         margin-top: 18px;
+      }
+      .post-body h4 {
+         font-family: 'Montserrat', sans-serif;
+         font-weight: 600;
+         font-size: 16px;
+         margin-top: 20px;
+      }
+      .post-body h4:first-child {
+         margin-top: 0;
+      }
       .sidebar-module {
          padding: 15px;
          margin: 0 0 20px;
@@ -108,95 +122,164 @@
             <hr>
 
             <div class="blog-post">
-               <h2 class="blog-title"><a href="#">Integrating LLMs into Large-Scale Job Matching</a></h2>
+               <h2 class="blog-title"><a data-toggle="collapse" href="#post-query-understanding" role="button" aria-expanded="false" aria-controls="post-query-understanding">Teaching a Search Engine What You Actually Meant</a></h2>
                <div class="blog-meta">
                   <span><i class="far fa-calendar-alt"></i> October 2025</span>
-                  <span><i class="far fa-folder"></i> Recommender Systems</span>
+                  <span><i class="far fa-folder"></i> Search &amp; LLMs</span>
                </div>
                <p>
-                  In our recent CIKM 2025 paper, we explored how Large Language Models can enhance query understanding in industrial job search systems. 
-                  Traditional keyword matching often fails to capture user intent in complex queries. By leveraging LLMs, we can bridge the semantic gap between 
-                  candidate profiles and job descriptions at scale...
+                  Job search queries are short, ambiguous, and rarely say what the seeker really wants. Keyword matching gives up quickly.
+                  Over the last two years my team replaced that layer with language models &mdash; and learned that the hard part isn't the model,
+                  it's the reward.
                </p>
                <div class="push-down-1">
-                  <a href="#" class="tag-label">#LLM</a>
-                  <a href="#" class="tag-label">#Search</a>
-                  <a href="#" class="tag-label">#LinkedIn</a>
+                  <span class="tag-label">#LLM</span>
+                  <span class="tag-label">#Search</span>
+                  <span class="tag-label">#LinkedIn</span>
                </div>
-               <a href="#" class="btn btn-default btn-sm read-more-btn">Read More &rarr;</a>
+               <a class="btn btn-default btn-sm read-more-btn" data-toggle="collapse" href="#post-query-understanding" role="button" aria-expanded="false" aria-controls="post-query-understanding">Read More &rarr;</a>
+
+               <div class="collapse post-body" id="post-query-understanding">
+                  <h4>Starting point: LLMs in the production stack</h4>
+                  <p>
+                     In <i>Powering Job Search at Scale</i> (CIKM 2025) we brought LLM-based query understanding into LinkedIn's
+                     production job matching system &mdash; interpreting seeker intent from queries that are often three words long,
+                     at full request volume.
+                  </p>
+
+                  <h4>Collapsing the cascade</h4>
+                  <p>
+                     Large search systems accumulate a cascade of task-specific query-understanding components, each with its own
+                     model, data, and failure modes. In <i>A Unified Structured Query Understanding Framework for Industrial Semantic Search</i>
+                     we replaced that cascade with a single Small Language Model doing constrained generation. The blocker was
+                     annotation, so we built <b>Query Illuminator</b>, which does double duty: teacher model for auto-annotation and
+                     distillation, and surrogate judge for evaluation at a scale humans can't cover. It runs today in both Job Search
+                     and People Search, inside strict latency limits on constrained GPU capacity.
+                     <a href="https://arxiv.org/abs/2605.27441" target="_blank">(paper)</a>
+                  </p>
+
+                  <h4>The lesson: reward design beats optimizer choice</h4>
+                  <p>
+                     Our most recent work generates <em>portable</em> queries &mdash; terms that drop seeker-specific identifiers but keep the
+                     qualifications that generalize. Training it with RLAIF surfaced something we didn't expect: policy optimization
+                     is very good at finding holes in LLM-as-judge rubrics. It collapsed into degenerate verbatim copying that scored
+                     well and helped nobody. A deterministic, rule-based reward floor fixed it. We also found the training-time reward
+                     model inflated apparent gains by 2.4&times;. For critic-free optimizers, how you write the reward matters more than
+                     which algorithm you reach for.
+                     <a href="https://arxiv.org/abs/2606.27291" target="_blank">(paper)</a>
+                  </p>
+               </div>
             </div>
 
             <div class="blog-post">
-               <h2 class="blog-title"><a href="#">LiGNN: Winning the Best Paper Award at KDD 2024</a></h2>
+               <h2 class="blog-title"><a data-toggle="collapse" href="#post-graph" role="button" aria-expanded="false" aria-controls="post-graph">Graphs at LinkedIn: From LiGNN to LinkSAGE</a></h2>
                <div class="blog-meta">
                   <span><i class="far fa-calendar-alt"></i> August 2024</span>
                   <span><i class="far fa-folder"></i> Graph Learning</span>
                </div>
                <p>
-                  I am thrilled to share that our paper "LiGNN: Graph Neural Networks at LinkedIn" received the Best Paper Award at KDD 2024! 
-                  LiGNN is the infrastructure that powers many of the recommendations you see on LinkedIn today. In this post, I break down the 
-                  engineering challenges of training GNNs on graphs with billions of nodes and edges...
+                  Our paper "LiGNN: Graph Neural Networks at LinkedIn" received the <b>Best Paper Award at KDD 2024</b>.
+                  It describes the platform side of graph learning here. The follow-up question I spent the next year on was narrower:
+                  how do you get graph signal into job matching without every team retraining a GNN?
                </p>
                <div class="push-down-1">
-                  <a href="#" class="tag-label">#GNN</a>
-                  <a href="#" class="tag-label">#KDD2024</a>
-                  <a href="#" class="tag-label">#GraphMining</a>
+                  <span class="tag-label">#GNN</span>
+                  <span class="tag-label">#KDD</span>
+                  <span class="tag-label">#JobMatching</span>
                </div>
-               <a href="#" class="btn btn-default btn-sm read-more-btn">Read More &rarr;</a>
+               <a class="btn btn-default btn-sm read-more-btn" data-toggle="collapse" href="#post-graph" role="button" aria-expanded="false" aria-controls="post-graph">Read More &rarr;</a>
+
+               <div class="collapse post-body" id="post-graph">
+                  <h4>LiGNN</h4>
+                  <p>
+                     LiGNN covers how graph neural networks are trained and served at LinkedIn scale &mdash; the infrastructure behind a
+                     large share of the recommendations on the platform. I contributed on the job matching side.
+                  </p>
+
+                  <h4>LinkSAGE</h4>
+                  <p>
+                     <i>LinkSAGE: Optimizing Job Matching Using Graph Neural Networks</i> (KDD 2025) takes a deliberately decoupled
+                     approach: GNN training is separated from the downstream ranking models. The graph model learns member and job
+                     representations once; many downstream models consume them without anyone retraining the graph model. That
+                     separation is what made graph signal practical to adopt across the matching stack rather than in one model.
+                  </p>
+
+                  <h4>And the plumbing</h4>
+                  <p>
+                     None of it ships without the boring part. <i>A Scalable and Efficient Signal Integration System for Job Matching</i>
+                     (KDD 2025) is about exactly that: getting heterogeneous signals into matching models efficiently enough that
+                     iterating on them stays cheap.
+                  </p>
+                  <p><a href="research.html">See all publications &rarr;</a></p>
+               </div>
             </div>
 
             <div class="blog-post">
-               <h2 class="blog-title"><a href="#">Understanding Filter Bubbles in News Recommendation</a></h2>
+               <h2 class="blog-title"><a data-toggle="collapse" href="#post-filter-bubbles" role="button" aria-expanded="false" aria-controls="post-filter-bubbles">Filter Bubbles, and What Happens When You Hand Users the Dial</a></h2>
                <div class="blog-meta">
                   <span><i class="far fa-calendar-alt"></i> May 2024</span>
                   <span><i class="far fa-folder"></i> Social Computing</span>
                </div>
                <p>
-                  My Ph.D. dissertation focused on a critical issue in modern information consumption: Filter Bubbles. 
-                  With my recent work presented at ICWSM 2024, we investigated how empowering users with greater system control 
-                  affects the diversity of news they consume. The results were surprising...
+                  My Ph.D. work was about filter bubbles in news recommender systems: how they form, who they affect most, and whether
+                  giving users explicit control over the algorithm actually changes what they read.
                </p>
                <div class="push-down-1">
-                  <a href="#" class="tag-label">#FilterBubbles</a>
-                  <a href="#" class="tag-label">#ICWSM</a>
-                  <a href="#" class="tag-label">#Research</a>
+                  <span class="tag-label">#FilterBubbles</span>
+                  <span class="tag-label">#ICWSM</span>
+                  <span class="tag-label">#Research</span>
                </div>
-               <a href="#" class="btn btn-default btn-sm read-more-btn">Read More &rarr;</a>
-            </div>
+               <a class="btn btn-default btn-sm read-more-btn" data-toggle="collapse" href="#post-filter-bubbles" role="button" aria-expanded="false" aria-controls="post-filter-bubbles">Read More &rarr;</a>
 
-            <nav aria-label="Page navigation">
-               <ul class="pager">
-                  <li class="previous disabled"><a href="#"><span aria-hidden="true">&larr;</span> Older</a></li>
-                  <li class="next disabled"><a href="#">Newer <span aria-hidden="true">&rarr;</span></a></li>
-               </ul>
-            </nav>
+               <div class="collapse post-body" id="post-filter-bubbles">
+                  <h4>Not everyone bubbles the same way</h4>
+                  <p>
+                     <i>The interaction between political typology and filter bubbles in news recommendation algorithms</i> (WWW 2021)
+                     looked at the same recommender across readers of different political typologies. The effect isn't uniform &mdash;
+                     which matters, because mitigations designed for an average user won't land evenly.
+                  </p>
+
+                  <h4>Giving users the controls</h4>
+                  <p>
+                     <i>How Does Empowering Users with Greater System Control Affect News Filter Bubbles?</i> (ICWSM 2024) asks the
+                     obvious follow-up: if the system exposes control over recommendations, does the bubble loosen?
+                  </p>
+
+                  <h4>The dissertation</h4>
+                  <p>
+                     Both threads are part of <i>Understanding and Combating Filter Bubbles in News Recommender Systems</i>
+                     (IIT, 2022), written with Mustafa Bilgic, Aron Culotta, and Matthew A. Shapiro.
+                     <a href="https://www.proquest.com/openview/67bd1785646a26571b8d9770465e256b/1?pq-origsite=gscholar&cbl=18750&diss=y" target="_blank">(read it)</a>
+                  </p>
+               </div>
+            </div>
 
          </div>
 
          <div class="col-md-3 col-md-offset-1">
-            
+
             <div class="sidebar-module">
                <h4>About</h4>
-               <p>I am <b>Ping Liu</b>, a Machine Learning Engineer at LinkedIn. I write about applying Deep Learning and GNNs to industrial scale problems.</p>
+               <p>I am <b>Ping Liu</b>, a Staff Machine Learning Engineer at LinkedIn. I write about applying LLMs, GNNs, and deep learning to industrial-scale search and matching problems.</p>
             </div>
 
             <div class="sidebar-module">
                <h4>Topics</h4>
                <ul class="list-unstyled">
-                  <li><a href="#">Graph Neural Networks</a></li>
-                  <li><a href="#">LLMs & GenAI</a></li>
-                  <li><a href="#">Recommender Systems</a></li>
-                  <li><a href="#">Computer Vision</a></li>
-                  <li><a href="#">Academic Research</a></li>
+                  <li>LLMs &amp; Query Understanding</li>
+                  <li>Graph Neural Networks</li>
+                  <li>Search &amp; Recommender Systems</li>
+                  <li>Filter Bubbles</li>
+                  <li>Academic Research</li>
                </ul>
             </div>
 
             <div class="sidebar-module">
                <h4>Connect</h4>
                <ul class="list-unstyled social-links">
-                  <li><a href="https://www.linkedin.com/in/ping-liu-7923b8aa"><i class="fab fa-linkedin"></i> LinkedIn</a></li>
-                  <li><a href="https://scholar.google.com/citations?user=2ESlO3UAAAAJ&hl=en"><i class="ai ai-google-scholar"></i> Google Scholar</a></li>
-                  <li><a href="https://github.com/pliu19"><i class="fab fa-github"></i> GitHub</a></li>
+                  <li><a href="https://www.linkedin.com/in/ping-liu-7923b8aa" target="_blank"><i class="fab fa-linkedin"></i> LinkedIn</a></li>
+                  <li><a href="https://scholar.google.com/citations?user=2ESlO3UAAAAJ&hl=en" target="_blank"><i class="ai ai-google-scholar"></i> Google Scholar</a></li>
+                  <li><a href="https://github.com/pliu19" target="_blank"><i class="fab fa-github"></i> GitHub</a></li>
                </ul>
             </div>
 
@@ -230,6 +313,15 @@
          // You may need to add <li id="blog"><a href="blog.html">Blog</a></li> to your navbar.html
          $("li#blog a").addClass("active");
          $("li#blog a").addClass("hvr-bubble-bottom");
+
+         // Swap the button label as a post opens and closes
+         $(".post-body")
+            .on("show.bs.collapse", function () {
+               $('.read-more-btn[href="#' + this.id + '"]').html("Show Less &uarr;");
+            })
+            .on("hide.bs.collapse", function () {
+               $('.read-more-btn[href="#' + this.id + '"]').html("Read More &rarr;");
+            });
       });
    </script>
 
