@@ -54,11 +54,12 @@
          <div class="col-sm-12">
             <h1>Research</h1>
             
-            <p>At <b>LinkedIn</b>, I work on the machine learning behind the job marketplace &mdash; connecting members to the opportunities worth their attention, whether they type a query or never search at all. Two questions organize most of it:</p>
+            <p>At <b>LinkedIn</b>, I work on the machine learning behind the job marketplace &mdash; connecting members to the opportunities worth their attention, whether they type a query or never search at all. Three questions organize most of it:</p>
 
             <ul class="push-down-1">
                <li><b>What does this member actually want?</b> &mdash; inferring intent from an explicit search query, and inferring it from a member's profile and activity when there is no query. This is where language models have changed the most: interpreting and structuring queries, and building representations of a member rich enough to retrieve against.</li>
-               <li><b>Which results genuinely match that intent?</b> &mdash; retrieval and ranking across a very large and constantly changing set of jobs and members. Graph-based representations, embedding retrieval, and semantic relevance models, together with the serving systems that keep all of it inside real latency and cost budgets.</li>
+               <li><b>Which results genuinely match that intent?</b> &mdash; retrieval and ranking across a very large and constantly changing set of jobs and members, through graph-based representations, embedding retrieval, and semantic relevance models.</li>
+               <li><b>How do we model it, and make it run at billion scale in real time?</b> &mdash; picking the right technique for each piece &mdash; large and distilled language models, graph neural networks, reinforcement learning from engagement signals &mdash; and then getting it to survive production: graphs with billions of nodes and edges, strict latency budgets, and limited GPU capacity. Decoupling training from serving, distillation, and signal-integration systems are what keep iteration cheap enough to continue.</li>
             </ul>
 
             <p>In practice the hard part is rarely the model. It is deciding what the system should optimize for, and then checking that the thing you measured is the thing you actually wanted.</p>
