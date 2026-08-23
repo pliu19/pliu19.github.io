@@ -47,7 +47,7 @@ primary sources and rewrites the two tables.
    `data-deadline`, the second by conference start date.
 6. Refresh the **ARR cycle table** from `aclrollingreview.org/dates`, which is
    authoritative for every ACL-family venue. Do not try to derive an ACL, EMNLP,
-   NAACL, EACL, AACL, or COLING deadline from the conference's own site — those
+   NAACL, EACL, or COLING deadline from the conference's own site — those
    pages restate a cycle date and sometimes disagree with ARR by a few days on
    commitment. The ARR page also tells you which venues each cycle feeds, which
    is how you discover pairings like NAACL 2027 and COLING 2027 sharing the
@@ -91,14 +91,14 @@ Venues currently tracked:
 - **IR / recsys / web**: SIGIR, SIGIR-AP, CIKM, WSDM, WWW, RecSys
 - **Data mining**: KDD, ICDM
 - **General ML / AI**: NeurIPS, ICML, ICLR, AISTATS, AAAI, IJCAI
-- **NLP**: ACL, EMNLP, NAACL, EACL, AACL, COLING, COLM
+- **NLP**: ACL, EMNLP, NAACL, EACL, COLING, COLM
 - **Agentic systems**: AAMAS (Generative and Agentic AI track), COLM
 - **Social / web science**: ICWSM
 
 Add a venue when asked; do not expand the list unprompted. Deliberately **out of
 scope** — do not re-add these when refreshing, even though they sit adjacent to
-the tracked venues and aggregators will surface them: ECIR, CHIIR, and the CV
-conferences (CVPR/ICCV/ECCV).
+the tracked venues and aggregators will surface them: ECIR, CHIIR, AACL-IJCNLP,
+and the CV conferences (CVPR/ICCV/ECCV).
 
 ## Finishing
 

@@ -1,5 +1,20 @@
 $(document).ready(function() {
 
+  // Keep the footer copyright year current ----------------------------------------
+  // The footer is injected asynchronously by w3IncludeHTML, so it may not be in the
+  // DOM yet. Poll briefly rather than assume; the markup carries a hardcoded year
+  // as the fallback if this never resolves.
+  var yearTries = 0;
+  var yearTimer = setInterval(function() {
+    var el = document.getElementById("copyright-year");
+    if (el) {
+      el.textContent = new Date().getFullYear();
+      clearInterval(yearTimer);
+    } else if (++yearTries > 40) {
+      clearInterval(yearTimer);
+    }
+  }, 50);
+
   // Scroll to top button ----------------------------------------------------------
   // When the user scrolls down 20px from the top of the document, show the button
   window.onscroll = function() {

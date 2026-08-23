@@ -76,35 +76,35 @@
                   Designing Reward Signals for Portable Query Generation: A Case Study in Industrial Semantic Job Search <br>
                   <b>Ping Liu</b>, Qianqi Shen, Jianqiang Shen, Wenqiong Liu, Rajat Arora, Yunxiang Ren, Chunnan Yao, Dan Xu, Baofen Zheng, Wanjun Jiang, Andrii Soviak, Kevin Kao, Jingwei Wu, Wenjing Zhang <br>
                   <i>KDD Workshop on AI Agent for Information Retrieval, Agent4IR (2026)</i> &nbsp;&middot;&nbsp; <a href="https://arxiv.org/abs/2606.27291" target="_blank">arXiv</a> <br>
-                  <span class="text-muted">An end-to-end RLAIF framework that generates <em>portable</em> job-search queries &mdash; abstracting away seeker-specific identifiers while preserving generalizable qualifications. We show that policy optimization readily exploits flaws in LLM-as-judge rubrics, collapsing into degenerate verbatim-copying, and that a deterministic rule-based reward floor fixes it. For critic-free optimizers, reward design matters more than the choice of algorithm.</span>
+                  <span class="text-muted">An end-to-end RLAIF framework that generates <em>portable</em> job-search queries &mdash; terms that abstract away seeker-specific identifiers while preserving generalizable qualifications. The reward surface turns out to be highly adversarial: policy optimization exploits flaws in LLM-as-judge rubrics and collapses into degenerate verbatim copying. A deterministic rule-based reward floor corrects it. For critic-free optimizers, reward shaping dominates the choice of algorithm &mdash; RLOO and REINFORCE++ resist reward hacking natively, while GRPO's group-relative advantage normalization proves uniquely sensitive to spurious signal.</span>
                </li><br>
 
                <li>
                   A Unified Structured Query Understanding Framework for Industrial Semantic Search <br>
                   <b>Ping Liu</b>, Qianqi Shen, Jianqiang Shen, Chunnan Yao, Kevin Kao, Rajat Arora, Dan Xu, Baofen Zheng, Yunxiang Ren, Benjamin Le, Ali Hooshmand, Igor Lapchuk, Juan Bottaro, Raghavan Muthuregunathan, Caleb Johnson, Liangjie Hong, Jingwei Wu, Wenjing Zhang <br>
                   <i>KDD (2026)</i> &nbsp;&middot;&nbsp; <a href="https://arxiv.org/abs/2605.27441" target="_blank">arXiv</a> <br>
-                  <span class="text-muted">Replaces the usual cascade of disparate, task-specific query-understanding components with a single Small Language Model doing constrained generation. Introduces <em>Query Illuminator</em>, which serves double duty as a teacher for auto-annotation and distillation and as a surrogate judge for scalable evaluation. Deployed in LinkedIn Job Search and People Search under strict latency limits on constrained GPU capacity.</span>
+                  <span class="text-muted">Replaces the usual cascade of disparate, task-specific query-understanding components with a single Small Language Model doing schema-constrained generation, which cuts the maintenance overhead and the inconsistent behaviour that cascade picks up on long-tail queries. Introduces <em>Query Illuminator</em>, which serves double duty as a teacher for auto-annotation and distillation and as a surrogate judge where human labels are scarce. Deployed in LinkedIn Job Search under strict latency limits on constrained GPU capacity, with a cross-domain case study on People Search.</span>
                </li><br>
 
                <li>
                   Powering Job Search at Scale: LLM-Enhanced Query Understanding in Job Matching Systems <br>
                   <b>Ping Liu</b>, Jianqiang Shen, Qianqi Shen, Chunnan Yao, Kevin Kao, Dan Xu, Rajat Arora, Baofen Zheng, Caleb Johnson, Liangjie Hong, Jingwei Wu, Wenjing Zhang <br>
                   <i>CIKM (2025)</i> &nbsp;&middot;&nbsp; <a href="https://doi.org/10.1145/3746252.3760913" target="_blank">paper</a> &nbsp;&middot;&nbsp; <a href="https://arxiv.org/abs/2509.09690" target="_blank">arXiv</a> <br>
-                  <span class="text-muted">Brings LLM-based query understanding into the production job search stack, interpreting seeker intent from short, ambiguous queries at LinkedIn's request volume.</span>
+                  <span class="text-muted">The first step toward the unified framework above. Job search had been reading queries through a set of task-specific named-entity models &mdash; brittle, expensive to maintain, and slow to follow a taxonomy as it moves. This replaces them with a single LLM that reads the query and profile attributes together, so a short, ambiguous query is interpreted in light of who is asking. Improved relevance in online A/B tests while removing a large amount of system complexity.</span>
                </li><br>
 
                <li>
                   LinkSAGE: Optimizing Job Matching Using Graph Neural Networks <br>
                   <b>Ping Liu</b>, Haichao Wei, Xiaochen Hou, Jianqiang Shen, Shihai He, Kay Qianqi Shen, Zhujun Chen, Fedor Borisyuk, Daniel Hewlett, Liang Wu, Srikant Veeraraghavan, Alex Tsun, Chengming Jiang, Wenjing Zhang <br>
                   <i>KDD (2025)</i> &nbsp;&middot;&nbsp; <a href="https://doi.org/10.1145/3690624.3709396" target="_blank">paper</a> &nbsp;&middot;&nbsp; <a href="https://arxiv.org/abs/2402.13430" target="_blank">arXiv</a> <br>
-                  <span class="text-muted">A graph neural network framework over LinkedIn's professional graph for job matching. GNN training is decoupled from the downstream ranking models, so learned member and job representations can be consumed by many models without retraining the graph model itself.</span>
+                  <span class="text-muted">A graph neural network framework over LinkedIn's job marketplace graph &mdash; billions of nodes and edges, members and jobs carrying their attributes. Inductive learning on a heterogeneous, evolving graph with an encoder-decoder GNN, and the part that makes it practical: GNN training is decoupled from the existing ranking DNNs, so graph signal reaches them by transfer learning instead of constant joint retraining. A nearline inference system serves the encoder, which keeps online latency down and avoids standing up real-time GNN infrastructure.</span>
                </li><br>
 
                <li>
                   A Scalable and Efficient Signal Integration System for Job Matching <br>
                   <b>Ping Liu</b>, Rajat Arora, Xiao Shi, Benjamin Le, Qianqi Shen, Jianqiang Shen, Chengming Jiang, Nikita Zhiltsov, Priya Bannur, Yidan Zhu, Liming Dong, Haichao Wei, Qi Guo, Luke Simon, Liangjie Hong, Wenjing Zhang <br>
                   <i>KDD (2025)</i> &nbsp;&middot;&nbsp; <a href="https://doi.org/10.1145/3711896.3737185" target="_blank">paper</a> &nbsp;&middot;&nbsp; <a href="https://arxiv.org/abs/2507.09797" target="_blank">arXiv</a> <br>
-                  <span class="text-muted">The infrastructure side of the problem: how heterogeneous signals get integrated into job matching models efficiently enough to keep iterating on them at scale.</span>
+                  <span class="text-muted">STAR (Signal Integration for Talent And Recruiters) pairs LLMs, which read the text of member profiles and job postings, with GNNs, which capture the relationships between them and blunt cold-start through network effects. Aimed at three failure modes of job matching &mdash; cold-start, filter bubbles, and bias in candidate-job pairing. As much about the industrial paradigms that keep embeddings maintainable in production, adaptive sampling and version management among them, as about the models.</span>
                </li><br>
 
             </ul>
