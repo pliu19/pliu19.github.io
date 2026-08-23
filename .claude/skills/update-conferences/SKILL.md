@@ -81,14 +81,16 @@ primary sources and rewrites the two tables.
 Venues currently tracked, in the spirit of "what a search/recsys person plans a
 submission year around":
 
-- **IR / recsys / web**: SIGIR, SIGIR-AP, CIKM, ECIR, WSDM, WWW, RecSys, CHIIR
+- **IR / recsys / web**: SIGIR, SIGIR-AP, CIKM, WSDM, WWW, RecSys
 - **Data mining**: KDD, ICDM
 - **General ML / AI**: NeurIPS, ICML, ICLR, AISTATS, AAAI, IJCAI
 - **NLP**: ACL, EMNLP, NAACL, EACL, AACL, COLING, COLM
 - **Social / web science**: ICWSM
 
-Add a venue when asked; do not expand the list unprompted, and do not add CV
-venues (CVPR/ICCV/ECCV) — they are out of scope for this site.
+Add a venue when asked; do not expand the list unprompted. Deliberately **out of
+scope** — do not re-add these when refreshing, even though they sit adjacent to
+the tracked venues and aggregators will surface them: ECIR, CHIIR, and the CV
+conferences (CVPR/ICCV/ECCV).
 
 ## Finishing
 
