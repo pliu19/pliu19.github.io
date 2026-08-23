@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+   <meta charset="utf-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1">
+   <meta name="description" content="Submission deadlines, dates, and locations for machine learning, information retrieval, and data mining conferences.">
+   <title>Ping Liu | Conference Deadlines</title>
+
+   <link rel="apple-touch-icon" sizes="57x57" href="favicons/apple-icon-57x57.png">
+   <link rel="apple-touch-icon" sizes="60x60" href="favicons/apple-icon-60x60.png">
+   <link rel="apple-touch-icon" sizes="72x72" href="favicons/apple-icon-72x72.png">
+   <link rel="apple-touch-icon" sizes="76x76" href="favicons/apple-icon-76x76.png">
+   <link rel="apple-touch-icon" sizes="114x114" href="favicons/apple-icon-114x114.png">
+   <link rel="apple-touch-icon" sizes="120x120" href="favicons/apple-icon-120x120.png">
+   <link rel="apple-touch-icon" sizes="144x144" href="favicons/apple-icon-144x144.png">
+   <link rel="apple-touch-icon" sizes="152x152" href="favicons/apple-icon-152x152.png">
+   <link rel="apple-touch-icon" sizes="180x180" href="favicons/apple-icon-180x180.png">
+   <link rel="icon" type="image/png" sizes="192x192" href="favicons/android-icon-192x192.png">
+   <link rel="icon" type="image/png" sizes="32x32" href="favicons/favicon-32x32.png">
+   <link rel="icon" type="image/png" sizes="96x96" href="favicons/favicon-96x96.png">
+   <link rel="icon" type="image/png" sizes="16x16" href="favicons/favicon-16x16.png">
+   <meta name="msapplication-TileColor" content="#ffffff">
+   <meta name="msapplication-TileImage" content="favicons/ms-icon-144x144.png">
+   <meta name="theme-color" content="#ffffff">
+
+   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
+      integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+
+   <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
+
+   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,400i,600,700" rel="stylesheet">
+   <link href="https://fonts.googleapis.com/css?family=Montserrat:400,400i,500,500i,600" rel="stylesheet">
+
+   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+      integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+
+   <link rel="stylesheet" href="https://cdn.rawgit.com/jpswalsh/academicons/master/css/academicons.min.css">
+
+   <link rel="stylesheet" href="css/main.css">
+
+   <style>
+      table.deadlines {
+         font-size: 1.4rem;
+      }
+
+      table.deadlines th {
+         font-weight: 600;
+         color: slategray;
+         border-bottom: 2px solid #dfe3e8 !important;
+         white-space: nowrap;
+      }
+
+      table.deadlines td,
+      table.deadlines th {
+         font-size: 1.4rem;
+         vertical-align: middle !important;
+      }
+
+      table.deadlines td.venue {
+         font-weight: 600;
+         white-space: nowrap;
+      }
+
+      table.deadlines td.venue a {
+         color: #20364c;
+      }
+
+      table.deadlines td.venue a:hover {
+         color: #1585cf;
+      }
+
+      /* Estimated dates read lighter than confirmed ones */
+      .est {
+         color: #8a97a4;
+         font-style: italic;
+      }
+
+      .est:before {
+         content: "\007E\00A0";
+      }
+
+      /* Applied by script: deadline already past */
+      tr.is-past td {
+         color: #a8b0b8;
+      }
+
+      tr.is-past td.venue a {
+         color: #a8b0b8;
+      }
+
+      /* Applied by script: deadline within 30 days */
+      tr.is-soon {
+         background-color: #fdf5e6 !important;
+      }
+
+      tr.is-soon td.venue a {
+         color: #b8860b;
+      }
+
+      .flag {
+         display: inline-block;
+         margin-left: 6px;
+         padding: 1px 6px;
+         border-radius: 3px;
+         font-size: 1.05rem;
+         font-weight: 600;
+         letter-spacing: 0.02em;
+         text-transform: uppercase;
+         background-color: #b8860b;
+         color: white;
+         vertical-align: middle;
+      }
+
+      .legend {
+         font-size: 1.3rem;
+      }
+
+      .legend .swatch {
+         display: inline-block;
+         width: 10px;
+         height: 10px;
+         margin-right: 4px;
+         border: 1px solid #d8dde2;
+         vertical-align: baseline;
+      }
+   </style>
+
+</head>
+
+<body>
+
+   <div w3-include-html="navbar.html"></div>
+
+   <div class="spacer-div-3 hidden-xs hidden-xs"></div>
+
+   <div id="main-container" class="container">
+
+      <div class="row">
+         <div class="col-sm-12">
+            <h1>Conference Deadlines</h1>
+
+            <p>A working calendar of the venues I follow &mdash; information retrieval, recommender systems, data
+               mining, and the general machine learning and NLP conferences that publish alongside them. It is scoped to
+               what is useful for planning a submission year, not to be exhaustive.</p>
+
+            <p>Dates in plain text are confirmed against the official call for papers. Dates shown as
+               <span class="est">like this</span> are <b>estimates</b> projected from the same venue's previous cycle,
+               because the call has not been posted yet &mdash; treat them as planning aids and confirm before you
+               commit to one. All deadlines are <abbr title="Anywhere on Earth">AoE</abbr> unless the venue says
+               otherwise.</p>
+
+            <h3 class="push-down-3"><span>Upcoming Deadlines</span></h3>
+
+            <p class="text-muted">Ordered by the operative submission deadline. For two-stage venues, the abstract
+               deadline is the one that actually binds &mdash; missing it usually forfeits the paper slot.</p>
+
+            <div class="table-responsive">
+               <table class="table table-hover deadlines" id="deadline-table">
+                  <thead>
+                     <tr>
+                        <th>Venue</th>
+                        <th>Abstract</th>
+                        <th>Full paper</th>
+                        <th>Conference</th>
+                        <th>Location</th>
+                     </tr>
+                  </thead>
+                  <tbody>
+
+                     <tr data-deadline="2026-08-24">
+                        <td class="venue"><a href="https://www.wsdm-conference.org/2027/" target="_blank">WSDM 2027</a></td>
+                        <td>Aug 17, 2026</td>
+                        <td>Aug 24, 2026</td>
+                        <td>Feb 15&ndash;19, 2027</td>
+                        <td>Hong Kong</td>
+                     </tr>
+
+                     <tr data-deadline="2026-09-15">
+                        <td class="venue"><a href="https://www.icwsm.org/2027/" target="_blank">ICWSM 2027</a> <span class="text-muted">(R2)</span></td>
+                        <td>&mdash;</td>
+                        <td>Sep 15, 2026</td>
+                        <td class="est">2027</td>
+                        <td>Edinburgh, UK</td>
+                     </tr>
+
+                     <tr data-deadline="2026-09-18">
+                        <td class="venue"><a href="https://iclr.cc/Conferences/2027" target="_blank">ICLR 2027</a></td>
+                        <td>Sep 18, 2026</td>
+                        <td>Sep 25, 2026</td>
+                        <td>Apr 26&ndash;30, 2027</td>
+                        <td>California, USA</td>
+                     </tr>
+
+                     <tr data-deadline="2026-09-21">
+                        <td class="venue"><a href="https://www.ecir2027.co.uk/" target="_blank">ECIR 2027</a></td>
+                        <td>Sep 21, 2026</td>
+                        <td>Oct 5, 2026</td>
+                        <td>Mar 21&ndash;25, 2027</td>
+                        <td>Southampton, UK</td>
+                     </tr>
+
+                     <tr data-deadline="2026-10-06">
+                        <td class="venue"><a href="https://virtual.aistats.org/" target="_blank">AISTATS 2027</a></td>
+                        <td>&mdash;</td>
+                        <td class="est">early Oct 2026</td>
+                        <td class="est">Apr 2027</td>
+                        <td>TBA</td>
+                     </tr>
+
+                     <tr data-deadline="2026-10-11">
+                        <td class="venue"><a href="https://acmweb2027.org/" target="_blank">WWW 2027</a></td>
+                        <td>Oct 11, 2026</td>
+                        <td>Oct 18, 2026</td>
+                        <td>May 10&ndash;14, 2027</td>
+                        <td>Dublin, Ireland</td>
+                     </tr>
+
+                     <tr data-deadline="2026-10-12">
+                        <td class="venue"><a href="https://aclrollingreview.org/dates" target="_blank">NAACL 2027</a></td>
+                        <td>&mdash;</td>
+                        <td>Oct 12, 2026 <span class="text-muted">(ARR)</span></td>
+                        <td>Jun 1&ndash;5, 2027</td>
+                        <td>San Francisco, USA</td>
+                     </tr>
+
+                     <tr data-deadline="2026-10-15">
+                        <td class="venue"><a href="https://chiir2027.github.io/" target="_blank">CHIIR 2027</a></td>
+                        <td>&mdash;</td>
+                        <td>Oct 15, 2026</td>
+                        <td>Mar 7&ndash;11, 2027</td>
+                        <td>Berlin, Germany</td>
+                     </tr>
+
+                     <tr data-deadline="2027-01-15">
+                        <td class="venue"><a href="https://www.icwsm.org/2027/" target="_blank">ICWSM 2027</a> <span class="text-muted">(R3)</span></td>
+                        <td>&mdash;</td>
+                        <td>Jan 15, 2027</td>
+                        <td class="est">2027</td>
+                        <td>Edinburgh, UK</td>
+                     </tr>
+
+                     <tr data-deadline="2027-01-15">
+                        <td class="venue"><a href="https://sigir.org/" target="_blank">SIGIR 2027</a></td>
+                        <td class="est">mid-Jan 2027</td>
+                        <td class="est">late Jan 2027</td>
+                        <td class="est">Jul 2027</td>
+                        <td>TBA</td>
+                     </tr>
+
+                     <tr data-deadline="2027-01-28">
+                        <td class="venue"><a href="https://icml.cc/" target="_blank">ICML 2027</a></td>
+                        <td>&mdash;</td>
+                        <td class="est">late Jan 2027</td>
+                        <td class="est">Jul 2027</td>
+                        <td>South America</td>
+                     </tr>
+
+                     <tr data-deadline="2027-02-01">
+                        <td class="venue"><a href="https://aclrollingreview.org/dates" target="_blank">ACL 2027</a></td>
+                        <td>&mdash;</td>
+                        <td class="est">Jan&ndash;Feb 2027 <span class="text-muted">(ARR)</span></td>
+                        <td>Aug 17&ndash;22, 2027</td>
+                        <td>Kyoto, Japan</td>
+                     </tr>
+
+                     <tr data-deadline="2027-02-01">
+                        <td class="venue"><a href="https://kdd2027.kdd.org/" target="_blank">KDD 2027</a> <span class="text-muted">(Cycle 2)</span></td>
+                        <td class="est">early Feb 2027</td>
+                        <td class="est">mid-Feb 2027</td>
+                        <td>Aug 1&ndash;5, 2027</td>
+                        <td>San Jose, USA</td>
+                     </tr>
+
+                     <tr data-deadline="2027-03-30">
+                        <td class="venue"><a href="https://colmweb.org/" target="_blank">COLM 2027</a></td>
+                        <td>&mdash;</td>
+                        <td class="est">late Mar 2027</td>
+                        <td>Oct 6&ndash;9, 2027</td>
+                        <td>TBA</td>
+                     </tr>
+
+                     <tr data-deadline="2027-04-26">
+                        <td class="venue"><a href="https://recsys.acm.org/recsys27/" target="_blank">RecSys 2027</a></td>
+                        <td class="est">late Apr 2027</td>
+                        <td class="est">early May 2027</td>
+                        <td>Aug 23&ndash;27, 2027</td>
+                        <td>Honolulu, USA</td>
+                     </tr>
+
+                     <tr data-deadline="2027-05-04">
+                        <td class="venue"><a href="https://neurips.cc/" target="_blank">NeurIPS 2027</a></td>
+                        <td class="est">early May 2027</td>
+                        <td class="est">mid-May 2027</td>
+                        <td class="est">Dec 2027</td>
+                        <td>Europe</td>
+                     </tr>
+
+                     <tr data-deadline="2027-05-25">
+                        <td class="venue">CIKM 2027</td>
+                        <td>&mdash;</td>
+                        <td class="est">late May 2027</td>
+                        <td class="est">Oct&ndash;Nov 2027</td>
+                        <td>TBA</td>
+                     </tr>
+
+                     <tr data-deadline="2027-06-06">
+                        <td class="venue">ICDM 2027</td>
+                        <td>&mdash;</td>
+                        <td class="est">early Jun 2027</td>
+                        <td class="est">Nov&ndash;Dec 2027</td>
+                        <td>TBA</td>
+                     </tr>
+
+                     <tr data-deadline="2027-07-19">
+                        <td class="venue"><a href="https://kdd2027.kdd.org/" target="_blank">KDD 2028</a> <span class="text-muted">(Cycle 1)</span></td>
+                        <td class="est">mid-Jul 2027</td>
+                        <td class="est">late Jul 2027</td>
+                        <td class="est">Aug 2028</td>
+                        <td>TBA</td>
+                     </tr>
+
+                     <tr data-deadline="2027-07-21">
+                        <td class="venue"><a href="https://aaai.org/conference/aaai/" target="_blank">AAAI 2028</a></td>
+                        <td class="est">late Jul 2027</td>
+                        <td class="est">late Jul 2027</td>
+                        <td class="est">Feb 2028</td>
+                        <td>TBA</td>
+                     </tr>
+
+                  </tbody>
+               </table>
+            </div>
+
+            <p class="legend text-muted">
+               <span class="swatch" style="background-color:#fdf5e6;"></span> deadline within 30 days &nbsp;&middot;&nbsp;
+               <span class="swatch" style="background-color:#ffffff;"></span> open &nbsp;&middot;&nbsp;
+               greyed rows have passed
+            </p>
+
+            <h3 class="push-down-3"><span>Conference Calendar</span></h3>
+
+            <p class="text-muted">The same venues ordered by when they actually meet &mdash; useful for travel and for
+               deciding which acceptance you would rather have.</p>
+
+            <div class="table-responsive">
+               <table class="table table-hover deadlines">
+                  <thead>
+                     <tr>
+                        <th>Venue</th>
+                        <th>Dates</th>
+                        <th>Location</th>
+                     </tr>
+                  </thead>
+                  <tbody>
+
+                     <tr>
+                        <td class="venue"><a href="https://2026.emnlp.org/" target="_blank">EMNLP 2026</a></td>
+                        <td>Oct 24&ndash;29, 2026</td>
+                        <td>Budapest, Hungary</td>
+                     </tr>
+
+                     <tr>
+                        <td class="venue"><a href="https://cikm2026.diag.uniroma1.it/" target="_blank">CIKM 2026</a></td>
+                        <td>Nov 7&ndash;11, 2026</td>
+                        <td>Rome, Italy</td>
+                     </tr>
+
+                     <tr>
+                        <td class="venue"><a href="https://icdm2026.neu.edu.cn/" target="_blank">ICDM 2026</a></td>
+                        <td>Nov 12&ndash;15, 2026</td>
+                        <td>Shenyang, China</td>
+                     </tr>
+
+                     <tr>
+                        <td class="venue"><a href="https://neurips.cc/Conferences/2026" target="_blank">NeurIPS 2026</a></td>
+                        <td>Dec 6&ndash;12, 2026</td>
+                        <td>Sydney, Australia <span class="text-muted">(satellites: Atlanta, Paris)</span></td>
+                     </tr>
+
+                     <tr>
+                        <td class="venue"><a href="https://www.sigir-ap.org/sigir-ap-2026/" target="_blank">SIGIR-AP 2026</a></td>
+                        <td>Dec 13&ndash;15, 2026</td>
+                        <td>Singapore</td>
+                     </tr>
+
+                     <tr>
+                        <td class="venue"><a href="https://www.wsdm-conference.org/2027/" target="_blank">WSDM 2027</a></td>
+                        <td>Feb 15&ndash;19, 2027</td>
+                        <td>Hong Kong</td>
+                     </tr>
+
+                     <tr>
+                        <td class="venue"><a href="https://aaai.org/conference/aaai/aaai-27/" target="_blank">AAAI 2027</a></td>
+                        <td>Feb 16&ndash;23, 2027</td>
+                        <td>Montr&eacute;al, Canada</td>
+                     </tr>
+
+                     <tr>
+                        <td class="venue"><a href="https://chiir2027.github.io/" target="_blank">CHIIR 2027</a></td>
+                        <td>Mar 7&ndash;11, 2027</td>
+                        <td>Berlin, Germany</td>
+                     </tr>
+
+                     <tr>
+                        <td class="venue"><a href="https://2027.eacl.org/" target="_blank">EACL 2027</a></td>
+                        <td>Mar 9&ndash;14, 2027</td>
+                        <td>Athens, Greece</td>
+                     </tr>
+
+                     <tr>
+                        <td class="venue"><a href="https://www.ecir2027.co.uk/" target="_blank">ECIR 2027</a></td>
+                        <td>Mar 21&ndash;25, 2027</td>
+                        <td>Southampton, UK</td>
+                     </tr>
+
+                     <tr>
+                        <td class="venue"><a href="https://iclr.cc/Conferences/2027" target="_blank">ICLR 2027</a></td>
+                        <td>Apr 26&ndash;30, 2027</td>
+                        <td>California, USA <span class="text-muted">(city TBA)</span></td>
+                     </tr>
+
+                     <tr>
+                        <td class="venue"><a href="https://acmweb2027.org/" target="_blank">WWW 2027</a></td>
+                        <td>May 10&ndash;14, 2027</td>
+                        <td>Dublin, Ireland</td>
+                     </tr>
+
+                     <tr>
+                        <td class="venue"><a href="https://aclrollingreview.org/dates" target="_blank">NAACL 2027</a></td>
+                        <td>Jun 1&ndash;5, 2027</td>
+                        <td>San Francisco, USA</td>
+                     </tr>
+
+                     <tr>
+                        <td class="venue"><a href="https://icml.cc/" target="_blank">ICML 2027</a></td>
+                        <td class="est">Jul 2027</td>
+                        <td>South America <span class="text-muted">(city TBA)</span></td>
+                     </tr>
+
+                     <tr>
+                        <td class="venue"><a href="https://kdd2027.kdd.org/" target="_blank">KDD 2027</a></td>
+                        <td>Aug 1&ndash;5, 2027</td>
+                        <td>San Jose, USA</td>
+                     </tr>
+
+                     <tr>
+                        <td class="venue"><a href="https://aclrollingreview.org/dates" target="_blank">ACL 2027</a></td>
+                        <td>Aug 17&ndash;22, 2027</td>
+                        <td>Kyoto, Japan</td>
+                     </tr>
+
+                     <tr>
+                        <td class="venue"><a href="https://recsys.acm.org/recsys27/" target="_blank">RecSys 2027</a></td>
+                        <td>Aug 23&ndash;27, 2027</td>
+                        <td>Honolulu, USA <span class="text-muted">(Waikiki)</span></td>
+                     </tr>
+
+                     <tr>
+                        <td class="venue"><a href="https://colmweb.org/" target="_blank">COLM 2027</a></td>
+                        <td>Oct 6&ndash;9, 2027</td>
+                        <td>TBA</td>
+                     </tr>
+
+                     <tr>
+                        <td class="venue"><a href="https://neurips.cc/" target="_blank">NeurIPS 2027</a></td>
+                        <td class="est">Dec 2027</td>
+                        <td>Europe <span class="text-muted">(city TBA)</span></td>
+                     </tr>
+
+                     <tr>
+                        <td class="venue"><a href="https://sigir.org/" target="_blank">SIGIR 2027</a></td>
+                        <td class="est">Jul 2027</td>
+                        <td>TBA</td>
+                     </tr>
+
+                     <tr>
+                        <td class="venue"><a href="https://virtual.aistats.org/" target="_blank">AISTATS 2027</a></td>
+                        <td class="est">Apr 2027</td>
+                        <td>TBA</td>
+                     </tr>
+
+                     <tr>
+                        <td class="venue"><a href="https://www.icwsm.org/2027/" target="_blank">ICWSM 2027</a></td>
+                        <td class="est">2027</td>
+                        <td>Edinburgh, UK</td>
+                     </tr>
+
+                  </tbody>
+               </table>
+            </div>
+
+            <h3 class="push-down-3"><span>Notes</span></h3>
+
+            <ul class="publications">
+               <li><b>KDD runs two cycles.</b> Cycle 1 for KDD 2027 closed on July 26, 2026 (notifications November 14,
+                  2026). Cycle 2 has not been posted; the estimate above follows KDD 2026, whose second cycle ran
+                  February 1 (abstract) and February 8 (paper).</li>
+               <li><b>ACL-family venues go through <a href="https://aclrollingreview.org/dates" target="_blank">ARR</a>.</b>
+                  You submit to a rolling review cycle and then commit to a specific conference, so the ARR deadline is
+                  the one to plan around &mdash; typically four to six months before the conference. EACL 2027's only
+                  viable cycle closed August 3, 2026.</li>
+               <li><b>ICML, NeurIPS, AISTATS, and SIGIR 2027 have announced regions but not cities or calls.</b> ICML
+                  2027 is slated for South America and NeurIPS 2027 for Europe; both list dates as forthcoming.</li>
+               <li><b>ICWSM uses three rolling rounds</b> rather than a single deadline &mdash; May 15, 2026,
+                  September 15, 2026, and January 15, 2027 for the 2027 edition.</li>
+            </ul>
+
+            <p class="text-muted push-down-3"><small>Verified against official calls for papers on August 23, 2026.
+               Deadlines move; confirm on the conference site before submitting.</small></p>
+
+         </div>
+      </div>
+
+   </div>
+
+   <a role="button" id="topper" data-toggle="tooltip" data-placement="top" title="Top" class="btn scroll-link"
+      href="#top"><i class="fa fa-fw fa-2x fa-caret-up" aria-hidden="true"></i></a>
+
+   <div w3-include-html="footer.html"></div>
+
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+   <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"
+      integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd"
+      crossorigin="anonymous"></script>
+
+   <script src="js/w3data.js"></script>
+   <script>
+      w3IncludeHTML()
+   </script>
+
+   <script src="js/main.js"></script>
+
+   <script>
+      $(document).ready(function () {
+         $("li#conferences a").addClass("active");
+         $("li#conferences a").addClass("hvr-bubble-bottom");
+
+         // Grey out deadlines that have passed and flag the ones inside 30 days,
+         // so the table stays honest without being re-edited every few weeks.
+         var DAY = 24 * 60 * 60 * 1000;
+         var today = new Date();
+         today = Date.UTC(today.getFullYear(), today.getMonth(), today.getDate());
+
+         $("#deadline-table tbody tr[data-deadline]").each(function () {
+            var parts = $(this).data("deadline").split("-");
+            var due = Date.UTC(+parts[0], parts[1] - 1, +parts[2]);
+            var daysLeft = Math.round((due - today) / DAY);
+
+            if (daysLeft < 0) {
+               $(this).addClass("is-past");
+            } else if (daysLeft <= 30) {
+               $(this).addClass("is-soon");
+               $(this).find("td.venue").append(
+                  '<span class="flag">' + (daysLeft === 0 ? "today" : daysLeft + "d") + '</span>'
+               );
+            }
+         });
+      });
+   </script>
+
+</body>
+
+</html>
