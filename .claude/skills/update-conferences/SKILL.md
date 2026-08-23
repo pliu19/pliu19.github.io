@@ -45,10 +45,18 @@ primary sources and rewrites the two tables.
    ICLR 2027's dates).
 5. Rewrite both tables. Keep them **sorted**: the first table by
    `data-deadline`, the second by conference start date.
-6. Update the Notes section — it explains two-cycle venues (KDD), ARR-mediated
-   venues (ACL/NAACL/EACL/EMNLP), rolling-round venues (ICWSM), and
-   region-announced-only venues. Correct anything that has moved.
-7. Update the trailing "Verified against official calls for papers on
+6. Refresh the **ARR cycle table** from `aclrollingreview.org/dates`, which is
+   authoritative for every ACL-family venue. Do not try to derive an ACL, EMNLP,
+   NAACL, EACL, AACL, or COLING deadline from the conference's own site — those
+   pages restate a cycle date and sometimes disagree with ARR by a few days on
+   commitment. The ARR page also tells you which venues each cycle feeds, which
+   is how you discover pairings like NAACL 2027 and COLING 2027 sharing the
+   October 2026 cycle.
+7. Update the Notes section — it explains two-cycle venues (KDD), ARR-mediated
+   venues, rolling-round venues (ICWSM), venues whose host city is announced only
+   at the preceding conference (IJCAI), and region-announced-only venues.
+   Correct anything that has moved.
+8. Update the trailing "Verified against official calls for papers on
    &lt;date&gt;" line to today's date.
 
 ## Page mechanics worth preserving
@@ -75,8 +83,8 @@ submission year around":
 
 - **IR / recsys / web**: SIGIR, SIGIR-AP, CIKM, ECIR, WSDM, WWW, RecSys, CHIIR
 - **Data mining**: KDD, ICDM
-- **General ML**: NeurIPS, ICML, ICLR, AISTATS, AAAI
-- **NLP**: ACL, EMNLP, NAACL, EACL, COLM
+- **General ML / AI**: NeurIPS, ICML, ICLR, AISTATS, AAAI, IJCAI
+- **NLP**: ACL, EMNLP, NAACL, EACL, AACL, COLING, COLM
 - **Social / web science**: ICWSM
 
 Add a venue when asked; do not expand the list unprompted, and do not add CV
