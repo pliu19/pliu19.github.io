@@ -42,25 +42,29 @@
 
    <style>
       table.deadlines {
-         font-size: 1.4rem;
+         font-size: 1.25rem;
       }
 
       table.deadlines th {
          font-weight: 600;
          color: slategray;
          border-bottom: 2px solid #dfe3e8 !important;
-         white-space: nowrap;
       }
 
+      /* Nothing wraps, so every row is exactly one line tall. The type is set a
+         step smaller than body copy to buy the width that costs; the table
+         still scrolls horizontally inside .table-responsive on narrow screens. */
       table.deadlines td,
       table.deadlines th {
-         font-size: 1.4rem;
+         font-size: 1.25rem;
+         line-height: 1.5;
+         padding: 7px 10px !important;
+         white-space: nowrap;
          vertical-align: middle !important;
       }
 
       table.deadlines td.venue {
          font-weight: 600;
-         white-space: nowrap;
       }
 
       table.deadlines td.venue a {
@@ -166,7 +170,8 @@
             <h3 class="push-down-3"><span>Upcoming Deadlines</span></h3>
 
             <p class="text-muted">Ordered by the operative submission deadline. For two-stage venues, the abstract
-               deadline is the one that actually binds &mdash; missing it usually forfeits the paper slot.</p>
+               deadline is the one that actually binds &mdash; missing it usually forfeits the paper slot. The
+               conference column is month and year only; exact dates are in the calendar below.</p>
 
             <div class="table-responsive">
                <table class="table table-hover deadlines" id="deadline-table">
@@ -185,7 +190,7 @@
                         <td class="venue"><a href="https://www.wsdm-conference.org/2027/" target="_blank">WSDM 2027</a></td>
                         <td>Aug 17, 2026</td>
                         <td>Aug 24, 2026</td>
-                        <td>Feb 15&ndash;19, 2027</td>
+                        <td>Feb 2027</td>
                         <td>Hong Kong</td>
                      </tr>
 
@@ -201,7 +206,7 @@
                         <td class="venue"><a href="https://iclr.cc/Conferences/2027" target="_blank">ICLR 2027</a></td>
                         <td>Sep 18, 2026</td>
                         <td>Sep 25, 2026</td>
-                        <td>Apr 26&ndash;30, 2027</td>
+                        <td>Apr 2027</td>
                         <td>California, USA</td>
                      </tr>
 
@@ -209,7 +214,7 @@
                         <td class="venue"><a href="https://warwick.ac.uk/fac/sci/dcs/aamas2027/" target="_blank">AAMAS 2027</a></td>
                         <td>Oct 1, 2026</td>
                         <td>Oct 8, 2026</td>
-                        <td>May 3&ndash;7, 2027</td>
+                        <td>May 2027</td>
                         <td>Hanoi, Vietnam</td>
                      </tr>
 
@@ -225,7 +230,7 @@
                         <td class="venue"><a href="https://acmweb2027.org/" target="_blank">WWW 2027</a></td>
                         <td>Oct 11, 2026</td>
                         <td>Oct 18, 2026</td>
-                        <td>May 10&ndash;14, 2027</td>
+                        <td>May 2027</td>
                         <td>Dublin, Ireland</td>
                      </tr>
 
@@ -233,7 +238,7 @@
                         <td class="venue"><a href="https://aclrollingreview.org/dates" target="_blank">NAACL 2027</a></td>
                         <td>&mdash;</td>
                         <td>Oct 12, 2026 <span class="text-muted">(ARR)</span></td>
-                        <td>Jun 1&ndash;5, 2027</td>
+                        <td>Jun 2027</td>
                         <td>San Francisco, USA</td>
                      </tr>
 
@@ -241,7 +246,7 @@
                         <td class="venue"><a href="https://2027.coling-iccl.org/" target="_blank">COLING 2027</a></td>
                         <td>&mdash;</td>
                         <td>Oct 12, 2026 <span class="text-muted">(ARR)</span></td>
-                        <td>May 9&ndash;14, 2027</td>
+                        <td>May 2027</td>
                         <td>Macau, China</td>
                      </tr>
 
@@ -272,8 +277,8 @@
                      <tr data-deadline="2027-01-20">
                         <td class="venue"><a href="https://aclrollingreview.org/dates" target="_blank">ACL 2027</a></td>
                         <td>&mdash;</td>
-                        <td class="est">Jan 2027 <span class="text-muted">(ARR Jan cycle)</span></td>
-                        <td>Aug 17&ndash;22, 2027</td>
+                        <td class="est">Jan 2027 <span class="text-muted">(ARR)</span></td>
+                        <td>Aug 2027</td>
                         <td>Kyoto, Japan</td>
                      </tr>
 
@@ -289,7 +294,7 @@
                         <td class="venue"><a href="https://kdd2027.kdd.org/" target="_blank">KDD 2027</a> <span class="text-muted">(Cycle 2)</span></td>
                         <td class="est">early Feb 2027</td>
                         <td class="est">mid-Feb 2027</td>
-                        <td>Aug 1&ndash;5, 2027</td>
+                        <td>Aug 2027</td>
                         <td>San Jose, USA</td>
                      </tr>
 
@@ -297,7 +302,7 @@
                         <td class="venue"><a href="https://colmweb.org/" target="_blank">COLM 2027</a></td>
                         <td>&mdash;</td>
                         <td class="est">late Mar 2027</td>
-                        <td>Oct 6&ndash;9, 2027</td>
+                        <td>Oct 2027</td>
                         <td>TBA</td>
                      </tr>
 
@@ -305,7 +310,7 @@
                         <td class="venue"><a href="https://recsys.acm.org/recsys27/" target="_blank">RecSys 2027</a></td>
                         <td class="est">late Apr 2027</td>
                         <td class="est">early May 2027</td>
-                        <td>Aug 23&ndash;27, 2027</td>
+                        <td>Aug 2027</td>
                         <td>Honolulu, USA</td>
                      </tr>
 
@@ -322,14 +327,14 @@
                         <td>&mdash;</td>
                         <td class="est">late May 2027 <span class="text-muted">(ARR)</span></td>
                         <td class="est">Nov 2027</td>
-                        <td class="est">Mexico / Central America</td>
+                        <td class="est">Mexico / C. America</td>
                      </tr>
 
                      <tr data-deadline="2027-05-25">
                         <td class="venue">CIKM 2027</td>
                         <td>&mdash;</td>
                         <td class="est">late May 2027</td>
-                        <td class="est">Oct&ndash;Nov 2027</td>
+                        <td class="est">Oct 2027</td>
                         <td>TBA</td>
                      </tr>
 
@@ -337,7 +342,7 @@
                         <td class="venue">ICDM 2027</td>
                         <td>&mdash;</td>
                         <td class="est">early Jun 2027</td>
-                        <td class="est">Nov&ndash;Dec 2027</td>
+                        <td class="est">Nov 2027</td>
                         <td>TBA</td>
                      </tr>
 
@@ -392,7 +397,7 @@
                         <td class="venue">May 2026</td>
                         <td>May 25, 2026</td>
                         <td>Aug 2, 2026</td>
-                        <td>EMNLP 2026, AACL-IJCNLP 2026</td>
+                        <td>EMNLP 2026, AACL 2026</td>
                      </tr>
 
                      <tr data-deadline="2026-08-03">
@@ -467,7 +472,7 @@
                      <tr>
                         <td class="venue"><a href="https://neurips.cc/Conferences/2026" target="_blank">NeurIPS 2026</a></td>
                         <td>Dec 6&ndash;12, 2026</td>
-                        <td>Sydney, Australia <span class="text-muted">(satellites: Atlanta, Paris)</span></td>
+                        <td>Sydney, Australia</td>
                      </tr>
 
                      <tr>
@@ -497,7 +502,7 @@
                      <tr>
                         <td class="venue"><a href="https://iclr.cc/Conferences/2027" target="_blank">ICLR 2027</a></td>
                         <td>Apr 26&ndash;30, 2027</td>
-                        <td>California, USA <span class="text-muted">(city TBA)</span></td>
+                        <td>California, USA</td>
                      </tr>
 
                      <tr>
@@ -527,7 +532,7 @@
                      <tr>
                         <td class="venue"><a href="https://icml.cc/" target="_blank">ICML 2027</a></td>
                         <td class="est">Jul 2027</td>
-                        <td>South America <span class="text-muted">(city TBA)</span></td>
+                        <td>South America</td>
                      </tr>
 
                      <tr>
@@ -551,7 +556,7 @@
                      <tr>
                         <td class="venue"><a href="https://recsys.acm.org/recsys27/" target="_blank">RecSys 2027</a></td>
                         <td>Aug 23&ndash;27, 2027</td>
-                        <td>Honolulu, USA <span class="text-muted">(Waikiki)</span></td>
+                        <td>Honolulu, USA</td>
                      </tr>
 
                      <tr>
@@ -563,13 +568,13 @@
                      <tr>
                         <td class="venue"><a href="https://aclrollingreview.org/dates" target="_blank">EMNLP 2027</a></td>
                         <td class="est">Nov 2027</td>
-                        <td class="est">Mexico / Central America</td>
+                        <td class="est">Mexico / C. America</td>
                      </tr>
 
                      <tr>
                         <td class="venue"><a href="https://neurips.cc/" target="_blank">NeurIPS 2027</a></td>
                         <td class="est">Dec 2027</td>
-                        <td>Europe <span class="text-muted">(city TBA)</span></td>
+                        <td>Europe</td>
                      </tr>
 
                      <tr>
