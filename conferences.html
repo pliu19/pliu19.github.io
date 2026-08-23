@@ -99,22 +99,34 @@
          color: #b8860b;
       }
 
-      .flag {
-         display: inline-block;
-         margin-left: 6px;
-         padding: 1px 6px;
-         border-radius: 3px;
-         font-size: 1.05rem;
+      /* "Days left" column, populated by script */
+      td.days,
+      th.days {
+         white-space: nowrap;
+         text-align: right;
+         font-variant-numeric: tabular-nums;
+      }
+
+      td.days {
+         color: #5a6b7c;
+      }
+
+      tr.is-soon td.days {
+         color: #b8860b;
          font-weight: 600;
-         letter-spacing: 0.02em;
-         text-transform: uppercase;
-         background-color: #b8860b;
-         color: white;
-         vertical-align: middle;
+      }
+
+      tr.is-past td.days {
+         color: #c2c8ce;
       }
 
       .legend {
          font-size: 1.3rem;
+      }
+
+      .est-inline {
+         color: #8a97a4;
+         font-style: italic;
       }
 
       .legend .swatch {
@@ -191,6 +203,14 @@
                         <td>Sep 25, 2026</td>
                         <td>Apr 26&ndash;30, 2027</td>
                         <td>California, USA</td>
+                     </tr>
+
+                     <tr data-deadline="2026-10-01">
+                        <td class="venue"><a href="https://warwick.ac.uk/fac/sci/dcs/aamas2027/" target="_blank">AAMAS 2027</a></td>
+                        <td>Oct 1, 2026</td>
+                        <td>Oct 8, 2026</td>
+                        <td>May 3&ndash;7, 2027</td>
+                        <td>Hanoi, Vietnam</td>
                      </tr>
 
                      <tr data-deadline="2026-10-06">
@@ -344,7 +364,9 @@
             <p class="legend text-muted">
                <span class="swatch" style="background-color:#fdf5e6;"></span> deadline within 30 days &nbsp;&middot;&nbsp;
                <span class="swatch" style="background-color:#ffffff;"></span> open &nbsp;&middot;&nbsp;
-               greyed rows have passed
+               greyed rows have passed &nbsp;&middot;&nbsp;
+               &ldquo;Days left&rdquo; counts down to the <b>abstract</b> deadline where one binds, otherwise the paper
+               deadline; a <span class="est-inline">~</span> marks a countdown to an estimated date
             </p>
 
             <h3 class="push-down-3"><span>ACL Rolling Review Cycles</span></h3>
@@ -476,6 +498,12 @@
                         <td class="venue"><a href="https://iclr.cc/Conferences/2027" target="_blank">ICLR 2027</a></td>
                         <td>Apr 26&ndash;30, 2027</td>
                         <td>California, USA <span class="text-muted">(city TBA)</span></td>
+                     </tr>
+
+                     <tr>
+                        <td class="venue"><a href="https://warwick.ac.uk/fac/sci/dcs/aamas2027/" target="_blank">AAMAS 2027</a></td>
+                        <td>May 3&ndash;7, 2027</td>
+                        <td>Hanoi, Vietnam</td>
                      </tr>
 
                      <tr>
@@ -616,25 +644,53 @@
          $("li#conferences a").addClass("active");
          $("li#conferences a").addClass("hvr-bubble-bottom");
 
-         // Grey out deadlines that have passed and flag the ones inside 30 days,
-         // so the table stays honest without being re-edited every few weeks.
+         // Grey out deadlines that have passed, highlight the ones inside 30 days,
+         // and add a live "days left" column. Everything derives from the row's
+         // data-deadline, so the tables stay honest without being re-edited.
          var DAY = 24 * 60 * 60 * 1000;
          var today = new Date();
          today = Date.UTC(today.getFullYear(), today.getMonth(), today.getDate());
 
-         $("#deadline-table tbody tr[data-deadline], #arr-table tbody tr[data-deadline]").each(function () {
-            var parts = $(this).data("deadline").split("-");
-            var due = Date.UTC(+parts[0], parts[1] - 1, +parts[2]);
-            var daysLeft = Math.round((due - today) / DAY);
+         // Where the days column goes, and how many leading cells hold the
+         // deadline dates (used to detect whether that deadline is an estimate).
+         var TABLES = [
+            { id: "#deadline-table", after: 2, dateCells: 2 },
+            { id: "#arr-table", after: 1, dateCells: 1 }
+         ];
 
-            if (daysLeft < 0) {
-               $(this).addClass("is-past");
-            } else if (daysLeft <= 30) {
-               $(this).addClass("is-soon");
-               $(this).find("td.venue").append(
-                  '<span class="flag">' + (daysLeft === 0 ? "today" : daysLeft + "d") + '</span>'
-               );
-            }
+         $.each(TABLES, function (_, spec) {
+            var $table = $(spec.id);
+            if (!$table.length) return;
+
+            $table.find("thead tr").each(function () {
+               $(this).find("th").eq(spec.after).after('<th class="days">Days left</th>');
+            });
+
+            $table.find("tbody tr[data-deadline]").each(function () {
+               var $row = $(this);
+               var parts = $row.data("deadline").split("-");
+               var due = Date.UTC(+parts[0], parts[1] - 1, +parts[2]);
+               var daysLeft = Math.round((due - today) / DAY);
+
+               // A deadline projected from last year's cycle gets a "~" so the
+               // countdown is not read as precise.
+               var approx = $row.find("td").slice(1, spec.dateCells + 1).filter(".est").length > 0;
+               var label;
+
+               if (daysLeft < 0) {
+                  $row.addClass("is-past");
+                  label = "closed";
+               } else {
+                  if (daysLeft <= 30) $row.addClass("is-soon");
+                  if (daysLeft === 0) {
+                     label = "today";
+                  } else {
+                     label = (approx ? "~" : "") + daysLeft + (daysLeft === 1 ? " day" : " days");
+                  }
+               }
+
+               $row.find("td").eq(spec.after).after('<td class="days">' + label + "</td>");
+            });
          });
       });
    </script>

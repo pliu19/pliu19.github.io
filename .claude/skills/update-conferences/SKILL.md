@@ -78,13 +78,21 @@ primary sources and rewrites the two tables.
 
 ## Scope
 
-Venues currently tracked, in the spirit of "what a search/recsys person plans a
-submission year around":
+The page tracks venues relevant to five focus areas: **retrieval, web search,
+recommender systems, NLP, and agentic systems**. Use that as the test when
+deciding whether a newly announced venue belongs.
+
+Do **not** filter by CCF or CORE tier. It was considered and rejected — every
+strict reading cuts CIKM, which is CCF-B and CORE-A despite being a venue that
+matters here. Breadth within the focus areas beats ranking purity.
+
+Venues currently tracked:
 
 - **IR / recsys / web**: SIGIR, SIGIR-AP, CIKM, WSDM, WWW, RecSys
 - **Data mining**: KDD, ICDM
 - **General ML / AI**: NeurIPS, ICML, ICLR, AISTATS, AAAI, IJCAI
 - **NLP**: ACL, EMNLP, NAACL, EACL, AACL, COLING, COLM
+- **Agentic systems**: AAMAS (Generative and Agentic AI track), COLM
 - **Social / web science**: ICWSM
 
 Add a venue when asked; do not expand the list unprompted. Deliberately **out of
