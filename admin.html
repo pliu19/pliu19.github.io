@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+   <meta charset="utf-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1">
+   <meta name="robots" content="noindex, nofollow">
+   <title>Write &middot; Ping Liu</title>
+
+   <link rel="icon" type="image/png" sizes="32x32" href="favicons/favicon-32x32.png">
+
+   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
+      integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,400i,600,700" rel="stylesheet">
+   <link href="https://fonts.googleapis.com/css?family=Montserrat:400,400i,500,500i,600" rel="stylesheet">
+   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+      integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+   <link rel="stylesheet" href="css/main.css">
+
+   <style>
+      body {
+         padding-bottom: 60px;
+      }
+
+      #gate {
+         max-width: 560px;
+         margin: 8vh auto 0;
+      }
+
+      .editor-col textarea {
+         font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+         font-size: 13px;
+         line-height: 1.65;
+         min-height: 460px;
+         resize: vertical;
+      }
+
+      #preview {
+         border: 1px solid #e6e9ec;
+         border-radius: 4px;
+         padding: 16px 18px;
+         min-height: 460px;
+         max-height: 70vh;
+         overflow-y: auto;
+         background: #fcfcfd;
+      }
+
+      #preview h1, #preview h2, #preview h3, #preview h4 {
+         font-family: "Montserrat", sans-serif;
+         font-weight: 600;
+         margin-top: 18px;
+      }
+
+      #preview h1:first-child, #preview h2:first-child {
+         margin-top: 0;
+      }
+
+      #preview pre {
+         background: #f5f6f7;
+         border: 1px solid #e6e9ec;
+         font-size: 12px;
+      }
+
+      #preview img {
+         max-width: 100%;
+      }
+
+      #preview blockquote {
+         font-size: 14px;
+      }
+
+      .bar {
+         position: sticky;
+         top: 0;
+         z-index: 20;
+         background: #fff;
+         border-bottom: 1px solid #e6e9ec;
+         padding: 10px 0;
+         margin-bottom: 18px;
+      }
+
+      .post-row {
+         padding: 9px 12px;
+         border: 1px solid #e6e9ec;
+         border-radius: 4px;
+         margin-bottom: 7px;
+         font-size: 13px;
+      }
+
+      .post-row.is-draft {
+         background: #fdf5e6;
+      }
+
+      .post-row .title {
+         font-weight: 600;
+      }
+
+      .muted-sm {
+         font-size: 12px;
+         color: #8a97a4;
+      }
+
+      label {
+         font-size: 12px;
+         text-transform: uppercase;
+         letter-spacing: .04em;
+         color: slategray;
+      }
+
+      #status {
+         font-size: 13px;
+      }
+   </style>
+</head>
+
+<body>
+
+   <!-- ================= Gate: no token, no editor ================= -->
+   <div id="gate" class="container" style="display:none">
+      <h2 style="margin-bottom:1.5rem">Write</h2>
+      <p class="text-muted">This page edits <code>pliu19/pliu19.github.io</code> through the GitHub API. It needs a
+         fine-grained personal access token with <b>Contents: Read and write</b> on that repository and nothing else.</p>
+      <p class="text-muted">The token is kept in this browser's local storage and is sent only to
+         <code>api.github.com</code>. It is never committed to the site. Without one, this page does nothing.</p>
+
+      <div class="form-group push-down-2">
+         <label for="token-input">GitHub token</label>
+         <input type="password" class="form-control" id="token-input" placeholder="github_pat_..." autocomplete="off">
+      </div>
+      <button class="btn btn-primary" id="token-save">Unlock</button>
+      <a class="btn btn-link" href="https://github.com/settings/personal-access-tokens/new" target="_blank">Create a token &rarr;</a>
+      <p id="gate-error" class="text-danger push-down-2" style="display:none"></p>
+   </div>
+
+   <!-- ================= Editor ================= -->
+   <div id="app" class="container" style="display:none">
+
+      <div class="bar">
+         <div class="row">
+            <div class="col-sm-6">
+               <strong id="mode-label">New post</strong>
+               <span id="status" class="text-muted"></span>
+            </div>
+            <div class="col-sm-6 text-right">
+               <button class="btn btn-default btn-sm" id="btn-new">New</button>
+               <button class="btn btn-default btn-sm" id="btn-draft">Save as draft</button>
+               <button class="btn btn-primary btn-sm" id="btn-publish">Publish</button>
+               <button class="btn btn-link btn-sm" id="btn-signout">Sign out</button>
+            </div>
+         </div>
+      </div>
+
+      <div class="row">
+         <div class="col-md-6 editor-col">
+
+            <div class="row">
+               <div class="col-sm-12 form-group">
+                  <label for="f-title">Title</label>
+                  <input type="text" class="form-control" id="f-title" placeholder="What the post is called">
+               </div>
+            </div>
+            <div class="row">
+               <div class="col-sm-5 form-group">
+                  <label for="f-date">Date</label>
+                  <input type="date" class="form-control" id="f-date">
+               </div>
+               <div class="col-sm-7 form-group">
+                  <label for="f-tags">Tags <span class="muted-sm">comma separated</span></label>
+                  <input type="text" class="form-control" id="f-tags" placeholder="retrieval, agents">
+               </div>
+            </div>
+            <div class="form-group">
+               <label for="f-summary">Summary <span class="muted-sm">shown on the blog index</span></label>
+               <textarea class="form-control" id="f-summary" rows="2" style="min-height:0"></textarea>
+            </div>
+            <div class="form-group">
+               <label for="f-body">Body <span class="muted-sm">markdown</span></label>
+               <textarea class="form-control" id="f-body" placeholder="## A heading&#10;&#10;Write in markdown."></textarea>
+            </div>
+
+            <h4 class="push-down-2">Posts</h4>
+            <div id="post-list"><p class="text-muted">Loading&hellip;</p></div>
+
+         </div>
+
+         <div class="col-md-6">
+            <label>Preview</label>
+            <div id="preview"></div>
+         </div>
+      </div>
+   </div>
+
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/12.0.2/marked.min.js"
+      integrity="sha512-xeUh+KxNyTufZOje++oQHstlMQ8/rpyzPuM+gjMFYK3z5ILJGE7l2NvYL+XfliKURMpBIKKp1XoPN/qswlSMFA=="
+      crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+   <script>
+      (function () {
+         "use strict";
+
+         var OWNER = "pliu19";
+         var REPO = "pliu19.github.io";
+         var BRANCH = "master";
+         var INDEX = "posts/index.json";
+         var TOKEN_KEY = "pl-blog-token";
+         var DRAFT_KEY = "pl-blog-scratch";
+
+         var $ = function (id) { return document.getElementById(id); };
+         var token = null;
+         var index = [];       // [{slug,title,date,tags,summary,draft}]
+         var editingSlug = null;
+
+         // ---------- helpers ----------
+
+         function enc(str) {
+            var bytes = new TextEncoder().encode(str), bin = "";
+            for (var i = 0; i < bytes.length; i++) bin += String.fromCharCode(bytes[i]);
+            return btoa(bin);
+         }
+
+         function dec(b64) {
+            var bin = atob(String(b64).replace(/\s/g, ""));
+            var bytes = new Uint8Array(bin.length);
+            for (var i = 0; i < bin.length; i++) bytes[i] = bin.charCodeAt(i);
+            return new TextDecoder().decode(bytes);
+         }
+
+         function slugify(s) {
+            return s.toLowerCase().trim()
+               .replace(/[^\w\s-]/g, "")
+               .replace(/\s+/g, "-")
+               .replace(/-+/g, "-")
+               .replace(/^-|-$/g, "")
+               .slice(0, 60);
+         }
+
+         function say(msg, kind) {
+            var el = $("status");
+            el.textContent = msg ? " — " + msg : "";
+            el.className = kind === "error" ? "text-danger" : (kind === "ok" ? "text-success" : "text-muted");
+         }
+
+         function api(path, opts) {
+            opts = opts || {};
+            return fetch("https://api.github.com/repos/" + OWNER + "/" + REPO + path, {
+               method: opts.method || "GET",
+               headers: {
+                  "Authorization": "Bearer " + token,
+                  "Accept": "application/vnd.github+json",
+                  "X-GitHub-Api-Version": "2022-11-28"
+               },
+               body: opts.body ? JSON.stringify(opts.body) : undefined
+            }).then(function (r) {
+               if (r.status === 404 && opts.allow404) return null;
+               if (!r.ok) {
+                  return r.json().catch(function () { return {}; }).then(function (j) {
+                     throw new Error((j && j.message) || ("GitHub API " + r.status));
+                  });
+               }
+               return r.status === 204 ? null : r.json();
+            });
+         }
+
+         // Read a file's content + sha. Returns null when the file does not exist.
+         function getFile(path) {
+            return api("/contents/" + encodeURI(path) + "?ref=" + BRANCH, { allow404: true })
+               .then(function (j) { return j ? { text: dec(j.content), sha: j.sha } : null; });
+         }
+
+         function putFile(path, text, message, sha) {
+            var body = { message: message, content: enc(text), branch: BRANCH };
+            if (sha) body.sha = sha;
+            return api("/contents/" + encodeURI(path), { method: "PUT", body: body });
+         }
+
+         function deleteFile(path, message, sha) {
+            return api("/contents/" + encodeURI(path),
+               { method: "DELETE", body: { message: message, sha: sha, branch: BRANCH } });
+         }
+
+         // ---------- auth gate ----------
+
+         function unlock(t) {
+            token = t;
+            // Verify the token really has push rights before showing the editor.
+            return api("").then(function (repo) {
+               if (!repo.permissions || !repo.permissions.push) {
+                  throw new Error("That token cannot write to this repository.");
+               }
+               localStorage.setItem(TOKEN_KEY, t);
+               $("gate").style.display = "none";
+               $("app").style.display = "block";
+               return loadIndex();
+            });
+         }
+
+         $("token-save").addEventListener("click", function () {
+            var t = $("token-input").value.trim();
+            if (!t) return;
+            $("gate-error").style.display = "none";
+            unlock(t).catch(function (e) {
+               token = null;
+               $("gate-error").textContent = e.message;
+               $("gate-error").style.display = "block";
+            });
+         });
+
+         $("token-input").addEventListener("keydown", function (e) {
+            if (e.key === "Enter") $("token-save").click();
+         });
+
+         $("btn-signout").addEventListener("click", function () {
+            localStorage.removeItem(TOKEN_KEY);
+            location.reload();
+         });
+
+         // ---------- index + post list ----------
+
+         function loadIndex() {
+            return getFile(INDEX).then(function (f) {
+               index = f ? JSON.parse(f.text) : [];
+               renderList();
+            });
+         }
+
+         function renderList() {
+            var host = $("post-list");
+            if (!index.length) {
+               host.innerHTML = '<p class="text-muted">No posts yet.</p>';
+               return;
+            }
+            host.innerHTML = "";
+            index.forEach(function (p) {
+               var row = document.createElement("div");
+               row.className = "post-row" + (p.draft ? " is-draft" : "");
+               row.innerHTML =
+                  '<div class="row"><div class="col-xs-8">' +
+                  '<span class="title"></span>' +
+                  '<div class="muted-sm"><span class="d"></span>' + (p.draft ? " &middot; draft" : "") + '</div>' +
+                  '</div><div class="col-xs-4 text-right">' +
+                  '<button class="btn btn-xs btn-default e">Edit</button> ' +
+                  '<button class="btn btn-xs btn-link text-danger x">Delete</button>' +
+                  '</div></div>';
+               row.querySelector(".title").textContent = p.title;
+               row.querySelector(".d").textContent = p.date;
+               row.querySelector(".e").addEventListener("click", function () { editPost(p.slug); });
+               row.querySelector(".x").addEventListener("click", function () { removePost(p); });
+               host.appendChild(row);
+            });
+         }
+
+         // ---------- editor ----------
+
+         function form() {
+            return {
+               title: $("f-title").value.trim(),
+               date: $("f-date").value,
+               tags: $("f-tags").value.split(",").map(function (s) { return s.trim(); }).filter(Boolean),
+               summary: $("f-summary").value.trim(),
+               body: $("f-body").value
+            };
+         }
+
+         function fill(p, body) {
+            $("f-title").value = p ? p.title : "";
+            $("f-date").value = p ? p.date : new Date().toISOString().slice(0, 10);
+            $("f-tags").value = p && p.tags ? p.tags.join(", ") : "";
+            $("f-summary").value = p ? (p.summary || "") : "";
+            $("f-body").value = body || "";
+            editingSlug = p ? p.slug : null;
+            $("mode-label").textContent = p ? "Editing: " + p.title : "New post";
+            renderPreview();
+         }
+
+         function renderPreview() {
+            var f = form();
+            var head = f.title ? "# " + f.title + "\n\n" : "";
+            $("preview").innerHTML = marked.parse(head + f.body);
+         }
+
+         ["f-title", "f-body"].forEach(function (id) {
+            $(id).addEventListener("input", function () {
+               renderPreview();
+               localStorage.setItem(DRAFT_KEY, JSON.stringify(form()));
+            });
+         });
+
+         $("btn-new").addEventListener("click", function () {
+            fill(null, "");
+            localStorage.removeItem(DRAFT_KEY);
+            say("");
+         });
+
+         function editPost(slug) {
+            var p = index.filter(function (x) { return x.slug === slug; })[0];
+            if (!p) return;
+            say("loading…");
+            getFile("posts/" + slug + ".md").then(function (f) {
+               fill(p, f ? f.text : "");
+               say("");
+               window.scrollTo(0, 0);
+            }).catch(function (e) { say(e.message, "error"); });
+         }
+
+         function save(isDraft) {
+            var f = form();
+            if (!f.title) { say("a title is required", "error"); return; }
+            if (!f.date) { say("a date is required", "error"); return; }
+
+            var slug = editingSlug || slugify(f.title);
+            if (!slug) { say("could not derive a filename from that title", "error"); return; }
+
+            var path = "posts/" + slug + ".md";
+            say("saving…");
+
+            // Write the body first, then update the index. Re-read both shas at
+            // save time so a stale sha from an earlier load cannot clobber.
+            getFile(path)
+               .then(function (existing) {
+                  return putFile(path, f.body, (existing ? "Update" : "Add") + " post: " + f.title,
+                     existing ? existing.sha : null);
+               })
+               .then(function () { return getFile(INDEX); })
+               .then(function (idxFile) {
+                  var list = idxFile ? JSON.parse(idxFile.text) : [];
+                  var entry = {
+                     slug: slug, title: f.title, date: f.date,
+                     tags: f.tags, summary: f.summary
+                  };
+                  if (isDraft) entry.draft = true;
+
+                  list = list.filter(function (p) { return p.slug !== slug; });
+                  list.push(entry);
+                  list.sort(function (a, b) { return a.date < b.date ? 1 : (a.date > b.date ? -1 : 0); });
+
+                  index = list;
+                  return putFile(INDEX, JSON.stringify(list, null, 2) + "\n",
+                     "Index post: " + f.title, idxFile ? idxFile.sha : null);
+               })
+               .then(function () {
+                  editingSlug = slug;
+                  $("mode-label").textContent = "Editing: " + f.title;
+                  localStorage.removeItem(DRAFT_KEY);
+                  renderList();
+                  say(isDraft ? "saved as draft" : "published — live in a minute or two", "ok");
+               })
+               .catch(function (e) { say(e.message, "error"); });
+         }
+
+         $("btn-publish").addEventListener("click", function () { save(false); });
+         $("btn-draft").addEventListener("click", function () { save(true); });
+
+         function removePost(p) {
+            if (!confirm('Delete "' + p.title + '"? This cannot be undone from here.')) return;
+            say("deleting…");
+            getFile("posts/" + p.slug + ".md")
+               .then(function (f) {
+                  return f ? deleteFile("posts/" + p.slug + ".md", "Remove post: " + p.title, f.sha) : null;
+               })
+               .then(function () { return getFile(INDEX); })
+               .then(function (idxFile) {
+                  var list = (idxFile ? JSON.parse(idxFile.text) : [])
+                     .filter(function (x) { return x.slug !== p.slug; });
+                  index = list;
+                  return putFile(INDEX, JSON.stringify(list, null, 2) + "\n",
+                     "Unindex post: " + p.title, idxFile ? idxFile.sha : null);
+               })
+               .then(function () {
+                  if (editingSlug === p.slug) fill(null, "");
+                  renderList();
+                  say("deleted", "ok");
+               })
+               .catch(function (e) { say(e.message, "error"); });
+         }
+
+         // ---------- boot ----------
+
+         marked.setOptions({ breaks: false, gfm: true });
+
+         var saved = localStorage.getItem(TOKEN_KEY);
+         if (saved) {
+            unlock(saved).catch(function () {
+               localStorage.removeItem(TOKEN_KEY);
+               $("gate").style.display = "block";
+            });
+         } else {
+            $("gate").style.display = "block";
+         }
+
+         // Restore an unsaved scratch draft, if any.
+         var scratch = localStorage.getItem(DRAFT_KEY);
+         if (scratch) {
+            try {
+               var d = JSON.parse(scratch);
+               $("f-title").value = d.title || "";
+               $("f-date").value = d.date || new Date().toISOString().slice(0, 10);
+               $("f-tags").value = (d.tags || []).join(", ");
+               $("f-summary").value = d.summary || "";
+               $("f-body").value = d.body || "";
+            } catch (e) { /* ignore a corrupt scratch */ }
+         }
+         if (!$("f-date").value) $("f-date").value = new Date().toISOString().slice(0, 10);
+         renderPreview();
+      })();
+   </script>
+
+</body>
+
+</html>

@@ -121,9 +121,9 @@
             
             <hr>
 
-            <div id="no-posts" class="text-muted">
-               <p><em>Nothing published here yet.</em></p>
-            </div>
+            <!-- Posts are rendered from posts/index.json by the script at the
+                 foot of this page. Written via admin.html. -->
+            <div id="posts"></div>
 
          </div>
 
@@ -178,20 +178,90 @@
 
    <script src="js/main.js"></script>
 
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/12.0.2/marked.min.js"
+      integrity="sha512-xeUh+KxNyTufZOje++oQHstlMQ8/rpyzPuM+gjMFYK3z5ILJGE7l2NvYL+XfliKURMpBIKKp1XoPN/qswlSMFA=="
+      crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
    <script>
       $(document).ready(function () {
-         // Highlights the 'Blog' tab in the navbar (Assuming the ID is "blog")
-         // You may need to add <li id="blog"><a href="blog.html">Blog</a></li> to your navbar.html
-         $("li#blog a").addClass("active");
-         $("li#blog a").addClass("hvr-bubble-bottom");
+         $("li#blog a").addClass("active").addClass("hvr-bubble-bottom");
 
-         // Swap the button label as a post opens and closes
-         $(".post-body")
-            .on("show.bs.collapse", function () {
+         // Swap the button label as a post opens and closes. Delegated, because
+         // the posts are rendered after this handler is bound.
+         $("#posts")
+            .on("show.bs.collapse", ".post-body", function () {
                $('.read-more-btn[href="#' + this.id + '"]').html("Show Less &uarr;");
             })
-            .on("hide.bs.collapse", function () {
+            .on("hide.bs.collapse", ".post-body", function () {
                $('.read-more-btn[href="#' + this.id + '"]').html("Read More &rarr;");
+            });
+
+         var MONTHS = ["January", "February", "March", "April", "May", "June",
+            "July", "August", "September", "October", "November", "December"];
+
+         function prettyDate(iso) {
+            var p = String(iso).split("-");
+            if (p.length !== 3) return iso;
+            return MONTHS[parseInt(p[1], 10) - 1] + " " + parseInt(p[2], 10) + ", " + p[0];
+         }
+
+         function esc(s) {
+            return $("<div>").text(s == null ? "" : s).html();
+         }
+
+         function render(posts) {
+            var $host = $("#posts").empty();
+
+            if (!posts.length) {
+               $host.append('<p class="text-muted"><em>Nothing published here yet.</em></p>');
+               return;
+            }
+
+            posts.forEach(function (p) {
+               var id = "post-" + p.slug;
+               var tags = (p.tags || []).map(function (t) {
+                  return '<span class="tag-label">#' + esc(t) + "</span>";
+               }).join(" ");
+
+               $host.append(
+                  '<div class="blog-post">' +
+                     '<h2 class="blog-title"><a data-toggle="collapse" role="button" href="#' + id + '">' +
+                        esc(p.title) +
+                     "</a></h2>" +
+                     '<div class="blog-meta">' +
+                        '<span><i class="far fa-calendar-alt"></i> ' + esc(prettyDate(p.date)) + "</span>" +
+                     "</div>" +
+                     (p.summary ? "<p>" + esc(p.summary) + "</p>" : "") +
+                     (tags ? '<div class="push-down-1">' + tags + "</div>" : "") +
+                     '<a class="btn btn-default btn-sm read-more-btn" data-toggle="collapse" ' +
+                        'role="button" href="#' + id + '">Read More &rarr;</a>' +
+                     '<div class="collapse post-body" id="' + id + '" data-slug="' + esc(p.slug) + '">' +
+                        '<p class="text-muted"><em>Loading&hellip;</em></p>' +
+                     "</div>" +
+                  "</div>"
+               );
+            });
+
+            // Fetch a post's markdown the first time it is opened, not before.
+            $("#posts").on("show.bs.collapse", ".post-body", function () {
+               var $body = $(this);
+               if ($body.data("loaded")) return;
+               $body.data("loaded", true);
+               $.ajax({ url: "posts/" + $body.data("slug") + ".md", cache: false, dataType: "text" })
+                  .done(function (md) { $body.html(marked.parse(md)); })
+                  .fail(function () {
+                     $body.html('<p class="text-danger">Could not load this post.</p>');
+                     $body.data("loaded", false);
+                  });
+            });
+         }
+
+         $.ajax({ url: "posts/index.json", cache: false, dataType: "json" })
+            .done(function (list) {
+               render((list || []).filter(function (p) { return !p.draft; }));
+            })
+            .fail(function () {
+               $("#posts").html('<p class="text-muted"><em>Nothing published here yet.</em></p>');
             });
       });
    </script>
