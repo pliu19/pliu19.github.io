@@ -43,6 +43,11 @@
    <style>
       table.deadlines {
          font-size: 1.25rem;
+         /* Bootstrap forces width:100%, which distributes the surplus width
+            into every column and leaves large gaps between short cells.
+            Size to content instead and let .table-responsive scroll. */
+         width: auto;
+         max-width: 100%;
       }
 
       table.deadlines th {
@@ -103,11 +108,13 @@
          color: #b8860b;
       }
 
-      /* "Days left" column, populated by script */
+      /* "Days left" column, populated by script. Left-aligned so it sits
+         directly beside the deadline it counts down to rather than being
+         pushed to the far edge of its column. */
       td.days,
       th.days {
          white-space: nowrap;
-         text-align: right;
+         text-align: left;
          font-variant-numeric: tabular-nums;
       }
 
@@ -235,17 +242,17 @@
                      </tr>
 
                      <tr data-deadline="2026-10-12">
-                        <td class="venue"><a href="https://aclrollingreview.org/dates" target="_blank">NAACL 2027</a></td>
+                        <td class="venue"><a href="https://aclrollingreview.org/dates" target="_blank">NAACL 2027</a> <span class="text-muted">(ARR)</span></td>
                         <td>&mdash;</td>
-                        <td>Oct 12, 2026 <span class="text-muted">(ARR)</span></td>
+                        <td>Oct 12, 2026</td>
                         <td>Jun 2027</td>
                         <td>San Francisco, USA</td>
                      </tr>
 
                      <tr data-deadline="2026-10-12">
-                        <td class="venue"><a href="https://2027.coling-iccl.org/" target="_blank">COLING 2027</a></td>
+                        <td class="venue"><a href="https://2027.coling-iccl.org/" target="_blank">COLING 2027</a> <span class="text-muted">(ARR)</span></td>
                         <td>&mdash;</td>
-                        <td>Oct 12, 2026 <span class="text-muted">(ARR)</span></td>
+                        <td>Oct 12, 2026</td>
                         <td>May 2027</td>
                         <td>Macau, China</td>
                      </tr>
@@ -275,9 +282,9 @@
                      </tr>
 
                      <tr data-deadline="2027-01-20">
-                        <td class="venue"><a href="https://aclrollingreview.org/dates" target="_blank">ACL 2027</a></td>
+                        <td class="venue"><a href="https://aclrollingreview.org/dates" target="_blank">ACL 2027</a> <span class="text-muted">(ARR)</span></td>
                         <td>&mdash;</td>
-                        <td class="est">Jan 2027 <span class="text-muted">(ARR)</span></td>
+                        <td class="est">Jan 2027</td>
                         <td>Aug 2027</td>
                         <td>Kyoto, Japan</td>
                      </tr>
@@ -323,9 +330,9 @@
                      </tr>
 
                      <tr data-deadline="2027-05-24">
-                        <td class="venue"><a href="https://aclrollingreview.org/dates" target="_blank">EMNLP 2027</a></td>
+                        <td class="venue"><a href="https://aclrollingreview.org/dates" target="_blank">EMNLP 2027</a> <span class="text-muted">(ARR)</span></td>
                         <td>&mdash;</td>
-                        <td class="est">late May 2027 <span class="text-muted">(ARR)</span></td>
+                        <td class="est">late May 2027</td>
                         <td class="est">Nov 2027</td>
                         <td class="est">Mexico / C. America</td>
                      </tr>
