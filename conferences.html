@@ -180,9 +180,10 @@
 
             <h3 class="push-down-3"><span>Upcoming Deadlines</span></h3>
 
-            <p class="text-muted">Ordered by the operative submission deadline. For two-stage venues, the abstract
-               deadline is the one that actually binds &mdash; missing it usually forfeits the paper slot. The
-               conference column is month and year only; exact dates are in the calendar below.</p>
+            <p class="text-muted">Open deadlines first, ordered by the operative submission deadline; closed ones
+               follow at the bottom. For two-stage venues, the abstract deadline is the one that actually binds
+               &mdash; missing it usually forfeits the paper slot. The conference column is month and year only;
+               exact dates are in the calendar below.</p>
 
             <div class="table-responsive">
                <table class="table table-hover deadlines" id="deadline-table">
@@ -763,6 +764,11 @@
 
                $row.find("td").eq(spec.after).after('<td class="days">' + label + "</td>");
             });
+
+            // Open deadlines first: move closed rows to the bottom, keeping
+            // their date order, so the source can stay sorted chronologically.
+            var $tbody = $table.find("tbody");
+            $tbody.append($tbody.find("tr.is-past"));
          });
       });
    </script>
